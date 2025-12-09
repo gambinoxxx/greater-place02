@@ -27,7 +27,7 @@ const HeroSection = () => {
             width={1100}
             height={500}
             alt="hero Image"
-            className="object-contain mx-auto"
+            className="object-contain mx-auto rounded-[10px]"
           />
         </div>
       </div>
