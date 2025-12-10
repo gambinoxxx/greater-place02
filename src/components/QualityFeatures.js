@@ -9,17 +9,6 @@ const QualityFeatures = () => {
     message: ''
   });
 
-  const coordinators = [
-    { id: 1, name: 'Ijeoma Mbaezue', role: 'Chair-Person', image: '/features/1.svg' },
-    { id: 2, name: 'Mycherie Onwuzuruike', role: 'Board Member', image: '/features/2.svg' },   
-    { id: 3, name: 'Ekemini Udom', role: 'Board Member', image: '/features/3.svg' },
-    { id: 4, name: 'Paula', role: 'Board Member', image: '/features/4.svg' },
-    { id: 5, name: 'Ayanna', role: 'Board Member', image: '/features/1.svg' },
-    { id: 6, name: 'Chidimma Okeh', role: 'Board Member', image: '/features/2.svg' },
-    { id: 7, name: 'Ijeoma Nmeregini', role: 'Board Member', image: '/features/3.svg' },
-    { id: 8, name: 'Ashaayla Anu Elora', role: 'Dance Instructor', image: '/features/4.svg' },
-  ];
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setDonationData(prev => ({ ...prev, [name]: value }));
@@ -36,46 +25,35 @@ const QualityFeatures = () => {
     <section className="container mx-auto px-5 md:px-16 py-20" id="donate">
       {/* Header Section */}
       <div className="text-center mb-16">
-        <span className="inline-block text-purple-600 font-semibold text-sm tracking-widest uppercase mb-4 bg-purple-50 px-6 py-2 rounded-full">
-          SUPPORT OUR MISSION
-        </span>
         <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-          Join Us in Making a Difference
+          Our Mission & Vision
         </h2>
         <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-          Meet our dedicated team and support our vision
+          Empowering youth through faith, dance, and community
         </p>
       </div>
 
       <div className="grid lg:grid-cols-2 gap-12 items-start">
-        {/* Coordinators Grid - Left Side */}
-        <div>
-          <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center lg:text-left">
-            Our Leadership Team
-          </h3>
-          <div className="grid sm:grid-cols-2 gap-6">
-            {coordinators.map(coordinator => (
-              <div 
-                key={coordinator.id}
-                className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100"
-              >
-                <div className="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden bg-gradient-to-br from-purple-100 to-blue-100 p-4 flex items-center justify-center">
-                  <img 
-                    src={coordinator.image} 
-                    alt={coordinator.name}
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-                <div className="text-center">
-                  <h4 className="text-lg font-bold text-gray-800 mb-1">
-                    {coordinator.name}
-                  </h4>
-                  <p className="text-sm text-purple-600 font-medium">
-                    {coordinator.role}
-                  </p>
-                </div>
-              </div>
-            ))}
+        {/* Mission & Vision - Left Side */}
+        <div className="space-y-8">
+          <div className="bg-gradient-to-br from-purple-50 to-blue-50 rounded-3xl p-8 shadow-lg">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4 flex items-center gap-3">
+              <span className="text-4xl">🎯</span>
+              Our Mission
+            </h2>
+            <p className="text-lg text-gray-700 leading-relaxed">
+              Greater Place nonprofit is a faith-based organization dedicated to liberating and empowering youth and young adults through the creative art of dance, personal development, and social impact.
+            </p>
+          </div>
+          
+          <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-3xl p-8 shadow-lg">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4 flex items-center gap-3">
+              <span className="text-4xl">✨</span>
+              Our Vision
+            </h2>
+            <p className="text-lg text-gray-700 leading-relaxed">
+              To create a transformative, inclusive, and safe space where young people ages 8-33 (and beyond) can explore their God-given gifts and creative styles in dance. At Greater Place, we envision a future where individuals, including those who have experienced mental health challenges, grow in confidence, deepen their relationship with God, serve their community, experience healing, and receive emotional support through the art of dance.
+            </p>
           </div>
         </div>
 
