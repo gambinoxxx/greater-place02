@@ -1,5 +1,4 @@
 "use client";
-//import Community from "@/components/Community";
 import CoreFeatures from "@/components/CoreFeatures";
 import Features from "@/components/Features";
 import HeroSection from "@/components/HeroSection";
@@ -22,7 +21,6 @@ export default function Home() {
       <Team />
       <Testimonials />
       <Subscribe />
-      //<Community />
     </div>
   );
 }
