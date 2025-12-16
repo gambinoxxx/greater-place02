@@ -17,8 +17,8 @@ export default function Home() {
       <Services />
      <CoreFeatures />
       <QualityFeatures />
-      <Work />
       <Team />
+      <Work />
       <Testimonials />
       <Subscribe />
     </div>
