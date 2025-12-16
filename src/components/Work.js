@@ -1,71 +1,322 @@
-import Image from "next/image";
-
-const WorkCard = ({ num, title }) => {
-  return (
-    <div className="w-[90%] sm:w-4/5 mx-auto md:mx-0 md:w-full flex flex-col md:gap-5 gap-3 text-center md:text-left">
-      <span className="md:mx-0 mx-auto text-3xl w-fit font-bold text-blue-800 bg-white rounded-full py-4 px-4">
-        {num}
-      </span>
-      <h2 className="text-xl font-semibold leading-relaxed">{title}</h2>
-      <p className="leading-loose">
-        Get your blood tests delivered at home collect a sample from the your
-        blood tests.
-      </p>
-    </div>
-  );
-};
+import React, { useState } from 'react';
 
 const Work = () => {
+  const [bookingData, setBookingData] = useState({
+    name: '',
+    email: '',
+    eventType: 'Wedding',
+    date: '',
+    guests: '50',
+    message: ''
+  });
+
+  const [status, setStatus] = useState('');
+  const [selectedMethod, setSelectedMethod] = useState('whatsapp');
+  const [upcomingEvents] = useState([
+    { id: 2, title: 'Ayomide Wedding Ogene Dance', date: '2025-08-01', location: 'Grand Hall' },
+    { id: 3, title: 'Annual Retreat', date: '2025-08-03', location: 'Grand Hall' },
+    { id: 5, title: 'Sheltering Grace/Far Above Rubies', date: '2025-10-25', location: 'Grand Ballroom' },
+  ]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setBookingData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setStatus('sending');
+
+    try {
+      if (selectedMethod === 'whatsapp') {
+        const formattedDate = new Date(bookingData.date).toLocaleDateString('en-US', {
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        });
+
+        const whatsappMessage = `*New Booking Request*%0A%0A
+          *Name:* ${encodeURIComponent(bookingData.name)}%0A
+          *Email:* ${encodeURIComponent(bookingData.email)}%0A
+          *Event Type:* ${encodeURIComponent(bookingData.eventType)}%0A
+          *Date:* ${encodeURIComponent(formattedDate)}%0A
+          *Guests:* ${encodeURIComponent(bookingData.guests)}%0A
+          *Message:* ${encodeURIComponent(bookingData.message || 'None')}`;
+
+        const whatsappUrl = `https://wa.me/+16786986413?text=${whatsappMessage}`;
+        window.open(whatsappUrl, '_blank');
+      } else {
+        window.open(
+          'https://docs.google.com/forms/d/1-MYUzyZe45vU5HZ9WI8QDkLeR1ZzCikt4uq0PQKPSIw/viewform?ts=67587118&edit_requested',
+          '_blank'
+        );
+      }
+
+      setStatus('success');
+      setTimeout(() => setStatus(''), 5000);
+      
+      if (selectedMethod === 'whatsapp') {
+        setBookingData({
+          name: '',
+          email: '',
+          eventType: 'Wedding',
+          date: '',
+          guests: '50',
+          message: ''
+        });
+      }
+
+    } catch (error) {
+      console.error('Submission error:', error);
+      setStatus('error');
+    }
+  };
+
   return (
-    <section className="w-full bg-rose-500 text-white bg-[url('/work/workbg.png')] bg-cover bg-no-repeat bg-center">
-      <div className="flex flex-col gap-10 lg:gap-16 container mx-auto md:px-16 px-5 py-12 sm:py-20 md:py-36">
-        <div>
-          <span className="uppercase block font-semibold text-sm tracking-widest text-center text-rose-200">
-            WHATS THE FUNCTION
-          </span>
-          <h2 className="text-2xl sm:text-4xl font-semibold my-3 text-center ">
-            Let&apos;s see how it works
-          </h2>
+    <section className="container mx-auto px-5 md:px-16 py-20" id="events">
+      {/* Header Section */}
+      <div className="text-center mb-16">
+        <span className="inline-block text-purple-600 font-semibold text-sm tracking-widest uppercase mb-4 bg-purple-50 px-6 py-2 rounded-full">
+          BOOKINGS & EVENTS
+        </span>
+        <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+          Plan Your Event or Join Ours
+        </h2>
+        <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          Book us for your special occasion or attend our upcoming events
+        </p>
+      </div>
+
+      <div className="grid lg:grid-cols-2 gap-12 items-start">
+        {/* Booking Form - Left Side */}
+        <div className="bg-gradient-to-br from-purple-50 to-blue-50 rounded-3xl p-8 md:p-12 shadow-xl">
+          <div className="flex gap-4 mb-8">
+            <button
+              type="button"
+              className={`flex-1 py-3 px-6 rounded-xl font-bold transition-all duration-300 ${
+                selectedMethod === 'whatsapp'
+                  ? 'bg-gradient-to-r from-green-500 to-green-600 text-white shadow-lg'
+                  : 'bg-white text-gray-700 border-2 border-gray-300 hover:border-green-400'
+              }`}
+              onClick={() => setSelectedMethod('whatsapp')}
+            >
+              📱 WhatsApp
+            </button>
+            <button
+              type="button"
+              className={`flex-1 py-3 px-6 rounded-xl font-bold transition-all duration-300 ${
+                selectedMethod === 'email'
+                  ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg'
+                  : 'bg-white text-gray-700 border-2 border-gray-300 hover:border-blue-400'
+              }`}
+              onClick={() => setSelectedMethod('email')}
+            >
+              📧 Email
+            </button>
+          </div>
+
+          <div className="space-y-6">
+            {selectedMethod === 'whatsapp' ? (
+              <>
+                <h3 className="text-2xl font-bold text-gray-900 mb-6">
+                  WhatsApp Booking Form
+                </h3>
+
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      Your Name
+                    </label>
+                    <input
+                      type="text"
+                      name="name"
+                      value={bookingData.name}
+                      onChange={handleChange}
+                      placeholder="John Doe"
+                      required
+                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition-all"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={bookingData.email}
+                      onChange={handleChange}
+                      placeholder="john@example.com"
+                      required
+                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition-all"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    Event Type
+                  </label>
+                  <select
+                    name="eventType"
+                    value={bookingData.eventType}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition-all"
+                  >
+                    <option value="Wedding">Wedding</option>
+                    <option value="Corporate">Corporate Event</option>
+                    <option value="Birthday">Birthday</option>
+                    <option value="Community">Community Event</option>
+                  </select>
+                </div>
+
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      Event Date
+                    </label>
+                    <input
+                      type="date"
+                      name="date"
+                      value={bookingData.date}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition-all"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      Number of Guests
+                    </label>
+                    <input
+                      type="number"
+                      name="guests"
+                      value={bookingData.guests}
+                      onChange={handleChange}
+                      placeholder="50"
+                      min="1"
+                      required
+                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition-all"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    Special Requests
+                  </label>
+                  <textarea
+                    name="message"
+                    value={bookingData.message}
+                    onChange={handleChange}
+                    placeholder="Tell us about your event..."
+                    rows="3"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition-all resize-none"
+                  />
+                </div>
+              </>
+            ) : (
+              <div className="text-center py-8">
+                <div className="text-6xl mb-4">📧</div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                  Email Booking Form
+                </h3>
+                <p className="text-gray-600 text-lg mb-6">
+                  You'll be redirected to our secure Google Form to complete your booking request.
+                </p>
+              </div>
+            )}
+
+            {status === 'success' && (
+              <div className="bg-green-100 text-green-800 px-4 py-3 rounded-lg font-medium animate-fadeIn">
+                ✅ {selectedMethod === 'whatsapp' 
+                  ? 'Booking request sent! Please check WhatsApp' 
+                  : 'Redirecting to secure form...'}
+              </div>
+            )}
+
+            {status === 'error' && (
+              <div className="bg-red-100 text-red-800 px-4 py-3 rounded-lg font-medium animate-fadeIn">
+                ❌ Failed to process request. Please try again.
+              </div>
+            )}
+
+            <button
+              type="button"
+              onClick={handleSubmit}
+              disabled={status === 'sending'}
+              className="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold text-lg px-12 py-4 rounded-full hover:from-purple-700 hover:to-blue-700 transform hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {status === 'sending' 
+                ? '📤 Processing...' 
+                : selectedMethod === 'whatsapp' 
+                  ? '📨 Send via WhatsApp' 
+                  : '📩 Proceed to Email Form'}
+            </button>
+          </div>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-5">
-          <div className="relative">
-            <WorkCard num="01" title="Set disbursement Instructions" />
-            <Image
-              src={"/work/arrow.svg"}
-              width={210}
-              height={300}
-              alt="arrow"
-              className="hidden absolute top-2 left-[4.5rem] xl:block"
-            />
+        {/* Upcoming Events - Right Side */}
+        <div>
+          <h3 className="text-3xl font-bold text-gray-900 mb-8 text-center lg:text-left">
+            Upcoming Events
+          </h3>
+          <div className="space-y-6">
+            {upcomingEvents.map(event => (
+              <div 
+                key={event.id}
+                className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 border border-gray-100 flex gap-6 items-start"
+              >
+                <div className="flex-shrink-0 bg-gradient-to-br from-purple-500 to-blue-500 text-white rounded-xl p-4 text-center min-w-[80px]">
+                  <div className="text-3xl font-bold">
+                    {new Date(event.date).getDate()}
+                  </div>
+                  <div className="text-sm font-semibold uppercase mt-1">
+                    {new Date(event.date).toLocaleString('default', { month: 'short' })}
+                  </div>
+                </div>
+                <div className="flex-1">
+                  <h4 className="text-xl font-bold text-gray-900 mb-2">
+                    {event.title}
+                  </h4>
+                  <p className="text-gray-600 flex items-center gap-2">
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                    </svg>
+                    {event.location}
+                  </p>
+                </div>
+              </div>
+            ))}
           </div>
 
-          <div className="relative">
-            <WorkCard
-              num="02"
-              title="Assembly retrieves funds from your account"
-            />
-            <Image
-              src={"/work/arrow.svg"}
-              width={205}
-              height={300}
-              alt="arrow"
-              className="hidden absolute top-7 left-[4.8rem] xl:block rotate"
-            />
-          </div>
-          <div className="relative">
-            <WorkCard num="03" title="Assembly initiates disbursement" />
-            <Image
-              src={"/work/arrow.svg"}
-              width={205}
-              height={300}
-              alt="arrow"
-              className="hidden absolute top-2 left-[4.7rem] xl:block"
-            />
-          </div>
-          <WorkCard num="04" title="Customer receives funds payment" />
+          {upcomingEvents.length === 0 && (
+            <div className="text-center py-12 bg-gray-50 rounded-2xl">
+              <p className="text-gray-500 text-lg">No upcoming events at the moment.</p>
+            </div>
+          )}
         </div>
       </div>
+
+      {/* Custom animations CSS */}
+      <style jsx>{`
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .animate-fadeIn {
+          animation: fadeIn 0.4s ease-out;
+        }
+      `}</style>
     </section>
   );
 };
