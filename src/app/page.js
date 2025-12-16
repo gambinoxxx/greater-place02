@@ -1,9 +1,8 @@
 "use client";
-import Community from "@/components/Community";
+//import Community from "@/components/Community";
 import CoreFeatures from "@/components/CoreFeatures";
 import Features from "@/components/Features";
 import HeroSection from "@/components/HeroSection";
-import Pricing from "@/components/Pricing";
 import QualityFeatures from "@/components/QualityFeatures";
 import Services from "@/components/Services";
 import Subscribe from "@/components/Subscribe";
@@ -20,11 +19,10 @@ export default function Home() {
      <CoreFeatures />
       <QualityFeatures />
       <Work />
-      <Pricing />
       <Team />
       <Testimonials />
       <Subscribe />
-      <Community />
+      //<Community />
     </div>
   );
 }
