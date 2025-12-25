@@ -280,10 +280,10 @@ const Work = () => {
               >
                 <div className="flex-shrink-0 bg-gradient-to-br from-purple-500 to-blue-500 text-white rounded-xl p-4 text-center min-w-[80px]">
                   <div className="text-3xl font-bold">
-                    {new Date(event.date).getDate()}
+                    {new Date(event.date).getUTCDate()}
                   </div>
                   <div className="text-sm font-semibold uppercase mt-1">
-                    {new Date(event.date).toLocaleString('default', { month: 'short' })}
+                    {new Date(event.date).toLocaleString('en-US', { month: 'short', timeZone: 'UTC' })}
                   </div>
                 </div>
                 <div className="flex-1">

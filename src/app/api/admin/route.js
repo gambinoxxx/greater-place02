@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import prisma from '../../../../lib/prisma';
-import imagekit from "../../../../configs/imagekit";
+import ImageKit from "imagekit";
 
 export const dynamic = "force-dynamic";
 
@@ -50,6 +50,12 @@ export async function POST(request) {
     // Convert file to buffer for ImageKit upload
     const buffer = Buffer.from(await file.arrayBuffer());
     
+    const imagekit = new ImageKit({
+      publicKey: process.env.NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY,
+      privateKey: process.env.IMAGEKIT_PRIVATE_KEY,
+      urlEndpoint: process.env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT,
+    });
+
     const uploadResponse = await imagekit.upload({
       file: buffer,
       fileName: file.name,
@@ -93,6 +99,12 @@ export async function DELETE(request) {
     });
 
     if (image && image.fileId) {
+      const imagekit = new ImageKit({
+        publicKey: process.env.NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY,
+        privateKey: process.env.IMAGEKIT_PRIVATE_KEY,
+        urlEndpoint: process.env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT,
+      });
+
       await imagekit.deleteFile(image.fileId);
     }
 
