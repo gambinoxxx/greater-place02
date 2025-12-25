@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Work = () => {
   const [bookingData, setBookingData] = useState({
@@ -12,11 +12,20 @@ const Work = () => {
 
   const [status, setStatus] = useState('');
   const [selectedMethod, setSelectedMethod] = useState('whatsapp');
-  const [upcomingEvents] = useState([
-    { id: 2, title: 'Ayomide Wedding Ogene Dance', date: '2025-08-01', location: 'Grand Hall' },
-    { id: 3, title: 'Annual Retreat', date: '2025-08-03', location: 'Grand Hall' },
-    { id: 5, title: 'Sheltering Grace/Far Above Rubies', date: '2025-10-25', location: 'Grand Ballroom' },
-  ]);
+  const [upcomingEvents, setUpcomingEvents] = useState([]);
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const res = await fetch('/api/admin');
+        const data = await res.json();
+        if (data.events) setUpcomingEvents(data.events.slice(0, 4));
+      } catch (error) {
+        console.error('Failed to fetch events', error);
+      }
+    };
+    fetchEvents();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

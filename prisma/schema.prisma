@@ -1,0 +1,39 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          Int      @id @default(autoincrement())
+  firebaseUid String   @unique @map("firebase_uid")
+  email       String
+  role        String   @default("user")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@map("users")
+}
+
+model GalleryImage {
+  id          Int      @id @default(autoincrement())
+  url         String
+  fileId      String?  @map("file_id")
+  title       String?
+  description String?
+  category    String?
+  isFeatured  Boolean  @default(false)
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("gallery_images")
+}
+model Event {
+  id        Int      @id @default(autoincrement())
+  title     String
+  date      DateTime
+  location  String
+  createdAt DateTime @default(now())
+}

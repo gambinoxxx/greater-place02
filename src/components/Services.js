@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
+import Image from "next/image";
 
 const Services = () => {
   const [showAll, setShowAll] = useState(false);
@@ -13,7 +14,7 @@ const Services = () => {
     const fetchImages = async () => {
       try {
         setLoading(true);
-        const response = await fetch('/api/gallery');
+        const response = await fetch('/api/admin');
         
         if (!response.ok) {
           throw new Error('Failed to fetch gallery images');
@@ -97,10 +98,11 @@ const Services = () => {
             className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer aspect-square bg-gray-100"
             onClick={() => setSelectedImage(image)}
           >
-            <img
+            <Image
               src={image.url}
               alt={image.title || `Gallery ${index + 1}`}
-              className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+              fill
+              className="object-cover transform group-hover:scale-110 transition-transform duration-500"
             />
             
             {/* Overlay */}

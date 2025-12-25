@@ -1,5 +1,7 @@
 "use client";
 
+import { auth } from "../../lib/firebase";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import Link from "next/link";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
@@ -11,13 +13,28 @@ import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import LightModeRoundedIcon from "@mui/icons-material/LightModeRounded";
 import { useEffect, useRef, useState } from "react";
 import { useTheme } from "next-themes";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
   const [selectedItem, setSelectedItem] = useState("/");
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [user, setUser] = useState(null);
   const navbar = useRef();
+  const router = useRouter();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  const handleLogout = async () => {
+    await signOut(auth);
+    router.push("/");
+  };
 
   useEffect(() => {
     window.onscroll = () => {
@@ -40,7 +57,7 @@ const Navbar = () => {
       <div className="container px-5 md:px-16 flex items-center justify-between mx-auto">
         <Link href={"/"}>
           <h2 className="text-3xl">
-            <span className="text-rose-600">N</span>aseem.
+            <span className="text-blue-600">G</span>reater <span className="text-blue-600">P</span>lace.
           </h2>
         </Link>
 
@@ -64,8 +81,8 @@ const Navbar = () => {
               <li
                 key={link}
                 className={`${
-                  selectedItem === link ? "text-rose-600" : ""
-                } capitalize border-b py-4 md:border-none md:py-0 hover:text-rose-600`}
+                  selectedItem === link ? "text-blue-600" : ""
+                } capitalize border-b py-4 md:border-none md:py-0 hover:text-blue-600`}
                 onClick={() => setSelectedItem(link)}
               >
                 <Link href={`#${link}`}>{link}</Link>
@@ -76,31 +93,44 @@ const Navbar = () => {
                 href="https://www.facebook.com/profile.php?id=100017192357822&sk"
                 target="_blank"
               >
-                <FacebookOutlinedIcon className="cursor-pointer hover:text-rose-600 text-xl" />
+                <FacebookOutlinedIcon className="cursor-pointer hover:text-blue-600 text-xl" />
               </Link>
               <Link
                 target="_blank"
                 href={"https://www.linkedin.com/in/naseem-khan-275275258/"}
               >
-                <LinkedInIcon className="cursor-pointer hover:text-rose-600 text-xl" />
+                <LinkedInIcon className="cursor-pointer hover:text-blue-600 text-xl" />
               </Link>
               <Link target="_blank" href={"https://github.com/NaseemKhan005/"}>
-                <GitHubIcon className="cursor-pointer hover:text-rose-600 text-xl" />
+                <GitHubIcon className="cursor-pointer hover:text-blue-600 text-xl" />
               </Link>
               <Link
                 target="_blank"
                 href={"https://www.instagram.com/naseem_khan005/"}
               >
-                <InstagramIcon className="cursor-pointer hover:text-rose-600 text-xl" />
+                <InstagramIcon className="cursor-pointer hover:text-blue-600 text-xl" />
               </Link>
             </div>
           </ul>
         </div>
 
         <div className="flex items-center gap-2 sm:gap-4 md:gap-2 lg:gap-4">
-          <button className="capitalize text-sm sm:text-base border-2 hover:border-2 font-semibold sm:py-3 py-2 px-3 sm:px-6 text-rose-600 border-rose-600 hover:border-rose-600 hover:bg-rose-600 hover:text-white rounded-full">
-            <Link href={"#qualityFeature"}>Get Started</Link>
-          </button>
+          {user ? (
+            <div className="flex items-center gap-2">
+              <Link href="/admin">
+                <button className="capitalize text-sm sm:text-base font-semibold sm:py-3 py-2 px-3 sm:px-6 text-white rounded-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 hover:scale-105 transition-all duration-300 shadow-md hover:shadow-lg">
+                  Dashboard
+                </button>
+              </Link>
+              <button onClick={handleLogout} className="text-sm font-semibold hover:text-red-500 transition-colors">Logout</button>
+            </div>
+          ) : (
+            <Link href={"/login"}>
+              <button className="capitalize text-sm sm:text-base font-semibold sm:py-3 py-2 px-3 sm:px-6 text-white rounded-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 hover:scale-105 transition-all duration-300 shadow-md hover:shadow-lg">
+                Login
+              </button>
+            </Link>
+          )}
           <button>
             {theme === "dark" ? (
               <LightModeRoundedIcon

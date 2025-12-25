@@ -12,25 +12,25 @@ const TeamCard = ({ imgSrc, name, title }) => {
         width={130}
         height={130}
         alt="team member"
-        className="drop-shadow-2xl w-20 sm:w-32 md:mb-5 mb-3 rounded-full border-2 border-rose-500 mx-auto"
+        className="drop-shadow-2xl w-20 sm:w-32 md:mb-5 mb-3 rounded-full border-2 border-purple-500 mx-auto"
       />
-      <h2 className="text-base sm:text-xl font-semibold text-center">{name}</h2>
+      <h2 className="text-base sm:text-xl font-semibold text-center text-purple-600">{name}</h2>
       <p className="text-center sm:text-base text-sm">{title}</p>
-      <div className="flex md:flex-col gap-3 md:absolute md:bottom-12 md:right-8 md:translate-y-10 icons md:transition-all md:duration-500 md:opacity-0 mx-auto md:mx-0 md:text-rose-600">
+      <div className="flex md:flex-col gap-3 md:absolute md:bottom-12 md:right-8 md:translate-y-10 icons md:transition-all md:duration-500 md:opacity-0 mx-auto md:mx-0 md:text-purple-600">
         <Link
           target="_blank"
           href="https://www.facebook.com/profile.php?id=100017192357822&sk"
         >
-          <FacebookRoundedIcon className="text-xl hover:text-rose-600 cursor-pointer md:hover:text-gray-500" />
+          <FacebookRoundedIcon className="text-xl hover:text-purple-600 cursor-pointer md:hover:text-gray-500" />
         </Link>
         <Link target="_blank" href="https://github.com/NaseemKhan005">
-          <GitHubIcon className="text-xl hover:text-rose-600 cursor-pointer md:hover:text-gray-500" />
+          <GitHubIcon className="text-xl hover:text-purple-600 cursor-pointer md:hover:text-gray-500" />
         </Link>
         <Link
           target="_blank"
           href="https://www.linkedin.com/in/naseem-khan-275275258/"
         >
-          <LinkedInIcon className="text-xl hover:text-rose-600 cursor-pointer md:hover:text-gray-500" />
+          <LinkedInIcon className="text-xl hover:text-purple-600 cursor-pointer md:hover:text-gray-500" />
         </Link>
       </div>
     </div>
