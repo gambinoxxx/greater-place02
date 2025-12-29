@@ -6,7 +6,7 @@ const FeatureCard = ({ imgSrc, title, desc, highlight }) => {
       <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-blue-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
       
       <div className="relative z-10">
-        <div className="bg-gradient-to-br from-purple-100 to-blue-100 rounded-xl p-4 w-20 h-20 mx-auto mb-6 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+        <div className="bg-black rounded-xl p-4 w-20 h-20 mx-auto mb-6 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
           <img
             src={imgSrc}
             width="48"
@@ -45,7 +45,7 @@ const Features = () => {
           About Greater Place Nonprofit Inc.
         </span>
         <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-          Our Mission & Vision
+          About Greater Place
         </h2>
         <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
           Creating a sacred space where people of all ages can embrace their God-given creative gifts through dance
@@ -57,7 +57,7 @@ const Features = () => {
         <div className="flex flex-col md:flex-row items-center gap-8">
           <div className="w-48 h-48 rounded-full overflow-hidden shadow-2xl ring-4 ring-white flex-shrink-0">
             <img
-              src="/features/1.svg"
+              src="/features/7.PNG"
               width="192"
               height="192"
               alt="Brandy Onwuzuruike"
@@ -70,8 +70,11 @@ const Features = () => {
               Brandy Onwuzuruike
             </h3>
             <p className="text-purple-600 font-semibold mb-4">Founder & Visionary</p>
+            <p className="text-gray-700 leading-relaxed text-lg mb-4">
+              Hi everyone! My name is Brandy Onwuzuruike, and I am the founder and visionary of Greater Place Nonprofit Inc. For as long as I can remember, I’ve had dreams and revelations of dancing and helping kids and youth. These visions confirmed what God was placing in my heart—that now is the time to fully walk in the calling He has given me.
+            </p>
             <p className="text-gray-700 leading-relaxed text-lg">
-              "God has given me this vision of Greater Place Nonprofit Inc. Like David who danced with all his might because of God's presence, I've learned that everyone has their own unique style of dance, but it's the presence of God that truly makes a difference."
+              As a little girl, dancing in God’s presence shaped my spirit, soul, and body in powerful ways. Over time, God has continued to prune and prepare me in ways I never expected. I truly believe that Greater Place is more than a dance it’s a space for holistic growth. It’s a place where individuals of all ages, especially youth, can be nurtured spiritually, emotionally, and physically—through the beautiful avenue of dance. At Greater Place, we believe God is concerned with the whole person. In 1 Thessalonians 5:23, Paul prays that our spirit, soul, and body be kept blameless until the coming of the Lord. This Scripture is foundational to what we do—we want people to grow in wholeness, strength, and confidence in Christ.
             </p>
           </div>
         </div>
@@ -80,28 +83,28 @@ const Features = () => {
       {/* Features Grid */}
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4 text-center mt-16">
         <FeatureCard
-          imgSrc="/features/1.svg"
+          imgSrc="/features/1.JPG"
           title="God's Presence"
           desc="We create an atmosphere where the tangible presence of God flows naturally through the art of dance, in worship and as a message to those He has called us to reach."
           highlight="Dancing in His presence shapes hearts in powerful ways"
         />
         
         <FeatureCard
-          imgSrc="/features/2.svg"
+          imgSrc="/features/2.JPG"
           title="Creative Expression"
           desc="A space where people of all ages can embrace their God-given creative gifts with confidence and boldness, connecting with God through dance."
           highlight="Every person has their own unique style of dance"
         />
         
         <FeatureCard
-          imgSrc="/features/3.svg"
+          imgSrc="/features/3.PNG"
           title="Lifestyle of Worship"
           desc="More than just a performance - it's a continual, consistent posture of surrender before God. A lifestyle of deep intimacy and authentic expression."
           highlight="It's not a one-time performance, it's a way of life"
         />
         
         <FeatureCard
-          imgSrc="/features/4.svg"
+          imgSrc="/features/4.PNG"
           title="Community Impact"
           desc="Building a community where others can experience transformation, connecting with God through their creative art and witnessing His presence in their lives."
           highlight="Blessing others through authentic worship and dance"
@@ -121,9 +124,9 @@ const Features = () => {
 
       {/* Call to Action */}
       <div className="text-center mt-16">
-        <button className="bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold text-lg px-12 py-4 rounded-full hover:from-purple-700 hover:to-blue-700 transform hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl">
+        {/* <button className="bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold text-lg px-12 py-4 rounded-full hover:from-purple-700 hover:to-blue-700 transform hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl">
           Join Our Mission
-        </button>
+        </button> */}
       </div>
     </section>
   );

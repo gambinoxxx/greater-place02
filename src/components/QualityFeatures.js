@@ -42,7 +42,7 @@ const QualityFeatures = () => {
               Our Mission
             </h2>
             <p className="text-lg text-gray-700 leading-relaxed">
-              Greater Place nonprofit is a faith-based organization dedicated to liberating and empowering youth and young adults through the creative art of dance, personal development, and social impact.
+              A faith-based nonprofit that partners with churches, schools, mental health programs, shelters, group homes, and communities to empower youth and young adults ages 8–33. We develop their gifts and build confidence through dance, mentorship, and creative expression—bringing freedom and social impact to their communities.
             </p>
           </div>
           
@@ -52,8 +52,19 @@ const QualityFeatures = () => {
               Our Vision
             </h2>
             <p className="text-lg text-gray-700 leading-relaxed">
-              To create a transformative, inclusive, and safe space where young people ages 8-33 (and beyond) can explore their God-given gifts and creative styles in dance. At Greater Place, we envision a future where individuals, including those who have experienced mental health challenges, grow in confidence, deepen their relationship with God, serve their community, experience healing, and receive emotional support through the art of dance.
+              To see youth and young adults walking in liberty, purpose, and confidence through creativity and the art of dance.
             </p>
+          </div>
+          
+          <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-3xl p-8 shadow-lg">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4 flex items-center gap-3">
+              <span className="text-4xl">🌍</span>
+              2026 Theme: The Gathering
+            </h2>
+            <p className="text-lg text-gray-700 leading-relaxed italic mb-2">
+              “Therefore go and make disciples of all nations, baptizing them in the name of the Father and of the Son and of the Holy Spirit, and teaching them to obey everything I have commanded you. And surely I am with you always, to the very end of the age.”
+            </p>
+            <p className="text-right text-purple-600 font-semibold">– Matthew 28:19–20</p>
           </div>
         </div>
 
