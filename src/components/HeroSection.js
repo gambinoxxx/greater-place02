@@ -8,10 +8,10 @@ const HeroSection = () => {
       id="home"
     >
       <div className="md:w-2/3 lg:w-1/2 container px-5 md:px-16 mx-auto">
-        <h1 className="capitalize flex flex-col gap-2 md:gap-5 text-3xl sm:text-4xl md:text-[3.2rem] 2xl:text-6xl font-bold">
+        <h1 className="capitalize flex flex-col gap-2 md:gap-5 text-3xl sm:text-4xl md:text-[3.2rem] 2xl:text-6xl font-bold dark:text-white">
           <span>Greater place</span>
         </h1>
-        <p className="text-lg leading-normal sm:leading-loose my-4 md:my-6">
+        <p className="text-lg leading-normal sm:leading-loose my-4 md:my-6 dark:text-gray-300">
           Welcome to Greater place Non-profit Inc
         </p>
         <Link href="#features" className="inline-block bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold text-lg px-12 py-4 rounded-full hover:from-purple-700 hover:to-blue-700 transform hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl">

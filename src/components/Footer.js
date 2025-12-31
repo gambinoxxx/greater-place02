@@ -31,14 +31,14 @@ const Footer = () => {
   };
 
   return (
-    <footer className="border-t border-neutral-200 mt-16 px-5 md:px-16 py-10 md:py-16">
+    <footer className="border-t border-neutral-200 dark:border-gray-700 mt-8 px-5 md:px-16 py-5 md:py-8">
       <div className="container mx-auto">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           <div>
             <Link href={"/"} className="text-3xl">
               <span className="text-purple-600">Greater</span> Place.
             </Link>
-            <p className="max-w-xs mt-4 text-sm">
+            <p className="max-w-xs mt-4 text-sm dark:text-gray-300">
               Creating a sacred space where people of all ages can embrace their God-given creative gifts through dance.
             </p>
             <div className="flex mt-8 space-x-6">
@@ -59,8 +59,8 @@ const Footer = () => {
 
           <div className="grid gap-8 lg:col-span-2 grid-cols-1 md:grid-cols-2">
             <div>
-              <p className="font-medium">Navigation</p>
-              <nav className="flex flex-col mt-4 space-y-2 text-sm">
+              <p className="font-medium dark:text-white">Navigation</p>
+              <nav className="flex flex-col mt-4 space-y-2 text-sm dark:text-gray-300">
                 <button
                   onClick={() => scrollToSection('header')}
                   className="hover:opacity-75 hover:border-b hover:border-neutral-400 w-fit text-left"
@@ -94,8 +94,8 @@ const Footer = () => {
               </nav>
             </div>
             <div>
-              <p className="font-medium">Get in Touch</p>
-              <div className="flex flex-col mt-4 space-y-2 text-sm text-gray-600">
+              <p className="font-medium dark:text-white">Get in Touch</p>
+              <div className="flex flex-col mt-4 space-y-2 text-sm text-gray-600 dark:text-gray-300">
                 <p>10609 Veterans Memorial Hwy</p>
                 <p>Lithia Springs, GA 30122</p>
                 <p>United States</p>
@@ -110,7 +110,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <p className="mt-8 text-xs">Copyright &copy; Greater Place Non Profit Inc. 2025</p>
+        <p className="mt-8 text-xs dark:text-gray-400">Copyright &copy; Greater Place Non Profit Inc. 2025</p>
       </div>
     </footer>
   );

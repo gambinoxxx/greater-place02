@@ -11,7 +11,7 @@ const Card = ({ imgSrc, title, desc }) => {
         className="mx-auto"
       />
       <h2 className="text-xl font-semibold text-purple-600">{title}</h2>
-      <p className="leading-loose text-gray-600">
+      <p className="leading-loose text-gray-600 dark:text-gray-300">
         {desc}
       </p>
     </div>
@@ -21,7 +21,7 @@ const Card = ({ imgSrc, title, desc }) => {
 const Community = () => {
   return (
     <section className="container mx-auto px-16 lg:px-32">
-      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-2 lg:gap-16 text-center mx-auto">
+      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-1 lg:gap-8 text-center mx-auto">
         <Card 
           imgSrc="/community/1.svg" 
           title="Join the Community" 

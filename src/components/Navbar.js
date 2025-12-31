@@ -51,7 +51,7 @@ const Navbar = () => {
     <div
       ref={navbar}
       className={`${
-        theme === "dark" ? "bg-[#121212]" : "bg-white text-black"
+        theme === "dark" ? "bg-gray-900 text-white" : "bg-white text-black"
       } w-full z-50 fixed top-0 left-0 py-4 mb-10`}
     >
       <div className="container px-5 md:px-16 flex items-center justify-between mx-auto">
@@ -65,7 +65,7 @@ const Navbar = () => {
           <ul
             className={`${toggleMenu === true ? "left-0" : "-left-full"} ${
               theme === "dark"
-                ? "bg-[#121212] text-white"
+                ? "bg-gray-900 text-white"
                 : "bg-white text-black"
             } z-50 flex md:items-center gap-1 md:gap-5 lg:gap-10 md:relative absolute top-0 md:left-0 w-80 transition-all duration-500 h-screen md:w-auto md:h-auto flex-col md:flex-row shadow-2xl py-24 px-10 md:p-0 md:shadow-none`}
           >

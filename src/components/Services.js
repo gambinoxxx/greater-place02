@@ -80,16 +80,16 @@ const Services = () => {
   }
 
   return (
-    <section className="relative container px-5 md:px-16 mx-auto py-20" id="gallery">
+    <section className="relative container px-5 md:px-16 mx-auto py-10" id="gallery">
       {/* Header Section */}
-      <div className="text-center mb-16">
+      <div className="text-center mb-8">
         <span className="inline-block text-purple-600 font-semibold text-sm tracking-widest uppercase mb-4 bg-purple-50 px-6 py-2 rounded-full">
           OUR GALLERY
         </span>
-        <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+        <h2 className="text-4xl md:text-5xl font-bold dark:text-white mb-6">
           Moments of Worship & Dance
         </h2>
-        <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+        <p className="text-xl  max-w-3xl mx-auto dark:text-white leading-relaxed ">
           Experience the joy and presence of God through our community
         </p>
       </div>
@@ -98,21 +98,21 @@ const Services = () => {
       <div className="flex justify-center gap-4 mb-8">
         <button
           onClick={() => setViewMode('grid-small')}
-          className={`p-2 rounded-lg transition-all ${viewMode === 'grid-small' ? 'bg-purple-600 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+          className={`p-2 rounded-lg transition-all ${viewMode === 'grid-small' ? 'bg-purple-600 text-white' : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'}`}
           title="Compact Grid"
         >
           <ViewComfyIcon />
         </button>
         <button
           onClick={() => setViewMode('grid-large')}
-          className={`p-2 rounded-lg transition-all ${viewMode === 'grid-large' ? 'bg-purple-600 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+          className={`p-2 rounded-lg transition-all ${viewMode === 'grid-large' ? 'bg-purple-600 text-white' : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'}`}
           title="Large Grid"
         >
           <GridViewIcon />
         </button>
         <button
           onClick={() => setViewMode('list')}
-          className={`p-2 rounded-lg transition-all ${viewMode === 'list' ? 'bg-purple-600 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+          className={`p-2 rounded-lg transition-all ${viewMode === 'list' ? 'bg-purple-600 text-white' : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'}`}
           title="List View"
         >
           <ViewListIcon />
@@ -124,13 +124,13 @@ const Services = () => {
         ${viewMode === 'grid-small' ? 'grid grid-cols-4 lg:grid-cols-8 gap-2' : ''}
         ${viewMode === 'grid-large' ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6' : ''}
         ${viewMode === 'list' ? 'flex flex-col gap-4 max-w-4xl mx-auto' : ''}
-        mb-12
+        mb-6
       `}>
         {displayedImages.map((image, index) => (
           <div
             key={image.id || `gallery-${index}`}
             className={`
-              group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer bg-gray-100
+              group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer bg-gray-100 dark:bg-gray-800
               ${viewMode === 'list' ? 'flex flex-row h-32 sm:h-40' : 'aspect-square'}
             `}
             onClick={() => setSelectedImage(image)}
@@ -147,8 +147,8 @@ const Services = () => {
             {/* Content */}
             {viewMode === 'list' ? (
               <div className="flex-1 p-4 sm:p-6 flex flex-col justify-center">
-                {image.title && <h3 className="text-lg sm:text-xl font-bold mb-1 sm:mb-2 text-gray-900">{image.title}</h3>}
-                {image.description && <p className="text-xs sm:text-sm text-gray-600 line-clamp-2">{image.description}</p>}
+                {image.title && <h3 className="text-lg sm:text-xl font-bold mb-1 sm:mb-2 text-gray-900 dark:text-white">{image.title}</h3>}
+                {image.description && <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 line-clamp-2">{image.description}</p>}
                 {image.category && (
                   <span className="inline-block mt-2 text-xs bg-purple-100 text-purple-700 px-3 py-1 rounded-full w-fit">
                     {image.category}

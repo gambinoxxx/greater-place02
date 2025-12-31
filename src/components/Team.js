@@ -15,7 +15,7 @@ const TeamCard = ({ imgSrc, name, title }) => {
         className="drop-shadow-2xl w-20 sm:w-32 md:mb-5 mb-3 rounded-full border-2 border-purple-500 mx-auto"
       />
       <h2 className="text-base sm:text-xl font-semibold text-center text-purple-600">{name}</h2>
-      <p className="text-center sm:text-base text-sm">{title}</p>
+      <p className="text-center sm:text-base text-sm dark:text-gray-300">{title}</p>
       <div className="flex md:flex-col gap-3 md:absolute md:bottom-12 md:right-8 md:translate-y-10 icons md:transition-all md:duration-500 md:opacity-0 mx-auto md:mx-0 md:text-purple-600">
         <Link
           target="_blank"
@@ -40,15 +40,19 @@ const TeamCard = ({ imgSrc, name, title }) => {
 const Team = () => {
   return (
     <section className="container mx-auto px-5 md:px-16 lg:px-24">
-      <span className="service-name text-center ">OUR TEAM</span>
-      <h2 className="title text-center md:w-1/2 mx-auto">
+      <div className="text-center">
+        <span className="inline-block text-purple-600 font-semibold text-sm tracking-widest uppercase mb-4 bg-purple-50 px-6 py-2 rounded-full">
+          OUR TEAM
+        </span>
+      </div>
+      <h2 className="title text-center md:w-1/2 mx-auto dark:text-white">
         The most qualified and talented individuals
       </h2>
 
-      <div className="mx-auto grid grid-cols-2 lg:grid-cols-3 gap-y-8 sm:gap-8 mt-16">
+      <div className="mx-auto grid grid-cols-2 lg:grid-cols-3 gap-y-4 sm:gap-4 mt-8">
         <TeamCard
-          imgSrc={"/team/1.png"}
-          name="Saimon Harmer"
+          imgSrc={"/features/7.PNG"}
+          name="Brandy Onwuzuruike"
           title="CEO and Founder"
         />
         <TeamCard imgSrc={"/team/2.png"} name="Aaron Nunez" title="Founder" />

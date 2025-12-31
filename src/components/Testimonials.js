@@ -1,6 +1,8 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
@@ -76,87 +78,103 @@ Greater Place showed me that worship isn’t about flawless steps, it’s about 
   },
 ];
 
-const Testimonials = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+const responsive = {
+  superLargeDesktop: {
+    breakpoint: { max: 4000, min: 3000 },
+    items: 3,
+  },
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 3,
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 2,
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1,
+  },
+};
 
-  const handleClick = (direction) => {
-    if (direction === 'left') {
-      setCurrentIndex(currentIndex === 0 ? testimonials.length - 1 : currentIndex - 1);
-    } else {
-      setCurrentIndex(currentIndex === testimonials.length - 1 ? 0 : currentIndex + 1);
-    }
-  };
-
+const CustomButtonGroup = ({ next, previous }) => {
   return (
-    <section className="container mx-auto px-5 md:px-16 py-20" id="testimonials">
-      <div className="text-center mb-12">
+    <div className="absolute top-1/2 left-0 w-full flex justify-between px-4 transform -translate-y-1/2 pointer-events-none z-10">
+      <button 
+        onClick={() => previous()} 
+        className="pointer-events-auto p-3 bg-white rounded-full shadow-lg text-purple-600 hover:bg-purple-50 transition-all"
+        aria-label="Previous"
+      >
+        <ArrowBackIosNewIcon fontSize="small" />
+      </button>
+      <button 
+        onClick={() => next()} 
+        className="pointer-events-auto p-3 bg-white rounded-full shadow-lg text-purple-600 hover:bg-purple-50 transition-all"
+        aria-label="Next"
+      >
+        <ArrowForwardIosIcon fontSize="small" />
+      </button>
+    </div>
+  );
+};
+
+const Card = ({ item }) => {
+  return (
+    <div className="mx-3 h-full flex flex-col gap-4 bg-white border border-gray-100 p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all">
+      <div className="flex items-center gap-4 border-b border-gray-100 pb-4">
+        <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-purple-100 flex-shrink-0">
+             <Image 
+               src={item.image} 
+               alt={item.name}
+               fill
+               className="object-cover"
+             />
+        </div>
+        <div>
+          <h3 className="font-bold text-gray-900">{item.name}</h3>
+          <p className="text-purple-600 text-sm font-medium">{item.role}</p>
+        </div>
+      </div>
+      
+      <div className="h-64 overflow-y-auto pr-2 custom-scrollbar">
+        <p className="text-gray-600 leading-relaxed text-sm whitespace-pre-line">
+          {item.fullText}
+        </p>
+      </div>
+    </div>
+  );
+};
+
+const Testimonials = () => {
+  return (
+    <section className="container mx-auto px-5 md:px-16 py-10 relative" id="testimonials">
+      <div className="text-center mb-10">
         <span className="inline-block text-purple-600 font-semibold text-sm tracking-widest uppercase mb-4 bg-purple-50 px-6 py-2 rounded-full">
           TESTIMONIALS
         </span>
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Community Stories</h2>
+        <h2 className="text-3xl md:text-4xl font-bold dark:text-white ">
+          Community Stories</h2>
       </div>
 
-      <div className="relative bg-white rounded-3xl shadow-xl p-8 md:p-12 max-w-5xl mx-auto border border-gray-100">
-        {/* Navigation Buttons */}
-        <button 
-          onClick={() => handleClick('left')}
-          className="absolute left-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-purple-50 text-purple-600 hover:bg-purple-100 transition-colors z-10 hidden md:block shadow-sm"
-          aria-label="Previous testimonial"
+      <div className="relative">
+        <Carousel
+          responsive={responsive}
+          arrows={false}
+          customButtonGroup={<CustomButtonGroup />}
+          infinite={true}
+          autoPlay={false}
+          itemClass="pb-4"
+          containerClass="carousel-container"
         >
-          <ArrowBackIosNewIcon />
-        </button>
-        
-        <button 
-          onClick={() => handleClick('right')}
-          className="absolute right-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-purple-50 text-purple-600 hover:bg-purple-100 transition-colors z-10 hidden md:block shadow-sm"
-          aria-label="Next testimonial"
-        >
-          <ArrowForwardIosIcon />
-        </button>
-
-        <div className="flex flex-col md:flex-row gap-8 items-start">
-          <div className="w-full md:w-1/3 flex flex-col items-center text-center">
-             <div className="w-32 h-32 md:w-48 md:h-48 rounded-full overflow-hidden border-4 border-purple-100 relative mb-4 shadow-lg">
-                <Image 
-                  src={testimonials[currentIndex].image} 
-                  alt={testimonials[currentIndex].name}
-                  fill
-                  className="object-cover"
-                />
-             </div>
-             <h3 className="text-2xl font-bold text-gray-900">{testimonials[currentIndex].name}</h3>
-             <p className="text-purple-600 font-medium">{testimonials[currentIndex].role}</p>
-          </div>
-
-          <div className="w-full md:w-2/3">
-            <div className="prose prose-purple max-w-none">
-               <div className="text-gray-600 leading-relaxed whitespace-pre-line text-sm md:text-base max-h-[500px] overflow-y-auto pr-4 custom-scrollbar">
-                 {testimonials[currentIndex].fullText}
-               </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Mobile Navigation */}
-        <div className="flex justify-center gap-4 mt-8 md:hidden">
-          <button 
-            onClick={() => handleClick('left')}
-            className="p-3 rounded-full bg-purple-50 text-purple-600 hover:bg-purple-100 transition-colors shadow-sm"
-          >
-            <ArrowBackIosNewIcon />
-          </button>
-          <button 
-            onClick={() => handleClick('right')}
-            className="p-3 rounded-full bg-purple-50 text-purple-600 hover:bg-purple-100 transition-colors shadow-sm"
-          >
-            <ArrowForwardIosIcon />
-          </button>
-        </div>
+          {testimonials.map((item) => (
+            <Card key={item.id} item={item} />
+          ))}
+        </Carousel>
       </div>
       
       <style jsx>{`
         .custom-scrollbar::-webkit-scrollbar {
-          width: 6px;
+          width: 4px;
         }
         .custom-scrollbar::-webkit-scrollbar-track {
           background: #f3f4f6;

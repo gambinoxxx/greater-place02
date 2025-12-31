@@ -44,10 +44,10 @@ const Features = () => {
         <span className="inline-block text-purple-600 font-semibold text-sm tracking-widest uppercase mb-4 bg-purple-50 px-6 py-2 rounded-full">
           About Greater Place Nonprofit Inc.
         </span>
-        <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+        <h2 className="text-4xl md:text-5xl font-bold dark:text-white mb-6">
           About Greater Place
         </h2>
-        <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+        <p className="text-xl  max-w-3xl mx-auto dark:text-white leading-relaxed ">
           Creating a sacred space where people of all ages can embrace their God-given creative gifts through dance
         </p>
       </div>
