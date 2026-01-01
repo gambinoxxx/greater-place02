@@ -107,7 +107,7 @@ const About = () => {
           imgSrc="/features/4.PNG"
           title="Community Impact"
           desc="Building a community where others can experience transformation, connecting with God through their creative art and witnessing His presence in their lives."
-          highlight="Blessing others through authentic worship and dance"
+          highlight="Blessing others through authentic worship and cultural dance"
         />
       </div>
 
