@@ -5,9 +5,7 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import Link from "next/link";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
-import FacebookOutlinedIcon from "@mui/icons-material/FacebookOutlined";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import GitHubIcon from "@mui/icons-material/GitHub";
+import YouTubeIcon from "@mui/icons-material/YouTube";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import LightModeRoundedIcon from "@mui/icons-material/LightModeRounded";
@@ -23,6 +21,15 @@ const Navbar = () => {
   const [user, setUser] = useState(null);
   const navbar = useRef();
   const router = useRouter();
+
+  const navLinks = [
+    { name: "home", id: "home" },
+    { name: "about", id: "about" },
+    { name: "gallery", id: "gallery" },
+    { name: "events", id: "events" },
+    { name: "team", id: "team" },
+    { name: "testimonial", id: "testimonials" },
+  ];
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -51,7 +58,7 @@ const Navbar = () => {
     <div
       ref={navbar}
       className={`${
-        theme === "dark" ? "bg-gray-900 text-white" : "bg-white text-black"
+        theme === "dark" ? "bg-[#121212] text-white" : "bg-white text-black"
       } w-full z-50 fixed top-0 left-0 py-4 mb-10`}
     >
       <div className="container px-5 md:px-16 flex items-center justify-between mx-auto">
@@ -65,7 +72,7 @@ const Navbar = () => {
           <ul
             className={`${toggleMenu === true ? "left-0" : "-left-full"} ${
               theme === "dark"
-                ? "bg-gray-900 text-white"
+                ? "bg-[#121212] text-white"
                 : "bg-white text-black"
             } z-50 flex md:items-center gap-1 md:gap-5 lg:gap-10 md:relative absolute top-0 md:left-0 w-80 transition-all duration-500 h-screen md:w-auto md:h-auto flex-col md:flex-row shadow-2xl py-24 px-10 md:p-0 md:shadow-none`}
           >
@@ -77,39 +84,32 @@ const Navbar = () => {
             >
               <CloseOutlinedIcon />
             </button>
-            {["home", "features", "qualityFeature", "testimonial"].map((link) => (
+            {navLinks.map((item) => (
               <li
-                key={link}
+                key={item.name}
                 className={`${
-                  selectedItem === link ? "text-blue-600" : ""
+                  selectedItem === item.name ? "text-blue-600" : ""
                 } capitalize border-b py-4 md:border-none md:py-0 hover:text-blue-600`}
-                onClick={() => setSelectedItem(link)}
+                onClick={() => setSelectedItem(item.name)}
               >
-                <Link href={`#${link}`}>{link}</Link>
+                <Link href={`#${item.id}`}>{item.name}</Link>
               </li>
             ))}
             <div className="md:hidden mx-auto absolute bottom-16 left-1/2 -translate-x-1/2 flex gap-3">
+              
               <Link
-                href="https://www.facebook.com/profile.php?id=100017192357822&sk"
+                href="https://www.instagram.com/reel/DI23Np5t2n1/?igsh=Nm5nbjVhbWt3aWF5"
                 target="_blank"
               >
-                <FacebookOutlinedIcon className="cursor-pointer hover:text-blue-600 text-xl" />
+                <InstagramIcon className="hover:text-purple-600 hover:-translate-y-1 transition-all" />
               </Link>
               <Link
+                href="https://youtube.com/@greaterplacenonprofit?si=JU5hHLMOAUOmBSAF"
                 target="_blank"
-                href={"https://www.linkedin.com/in/naseem-khan-275275258/"}
               >
-                <LinkedInIcon className="cursor-pointer hover:text-blue-600 text-xl" />
+                <YouTubeIcon className="hover:text-purple-600 hover:-translate-y-1 transition-all" />
               </Link>
-              <Link target="_blank" href={"https://github.com/NaseemKhan005/"}>
-                <GitHubIcon className="cursor-pointer hover:text-blue-600 text-xl" />
-              </Link>
-              <Link
-                target="_blank"
-                href={"https://www.instagram.com/naseem_khan005/"}
-              >
-                <InstagramIcon className="cursor-pointer hover:text-blue-600 text-xl" />
-              </Link>
+            
             </div>
           </ul>
         </div>

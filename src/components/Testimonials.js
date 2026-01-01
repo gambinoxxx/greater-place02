@@ -102,14 +102,14 @@ const CustomButtonGroup = ({ next, previous }) => {
     <div className="absolute top-1/2 left-0 w-full flex justify-between px-4 transform -translate-y-1/2 pointer-events-none z-10">
       <button 
         onClick={() => previous()} 
-        className="pointer-events-auto p-3 bg-white rounded-full shadow-lg text-purple-600 hover:bg-purple-50 transition-all"
+        className="pointer-events-auto p-3 bg-white dark:bg-gray-800 rounded-full shadow-lg text-purple-600 hover:bg-purple-50 dark:hover:bg-gray-700 transition-all"
         aria-label="Previous"
       >
         <ArrowBackIosNewIcon fontSize="small" />
       </button>
       <button 
         onClick={() => next()} 
-        className="pointer-events-auto p-3 bg-white rounded-full shadow-lg text-purple-600 hover:bg-purple-50 transition-all"
+        className="pointer-events-auto p-3 bg-white dark:bg-gray-800 rounded-full shadow-lg text-purple-600 hover:bg-purple-50 dark:hover:bg-gray-700 transition-all"
         aria-label="Next"
       >
         <ArrowForwardIosIcon fontSize="small" />
@@ -120,8 +120,8 @@ const CustomButtonGroup = ({ next, previous }) => {
 
 const Card = ({ item }) => {
   return (
-    <div className="mx-3 h-full flex flex-col gap-4 bg-white border border-gray-100 p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all">
-      <div className="flex items-center gap-4 border-b border-gray-100 pb-4">
+    <div className="mx-3 h-full flex flex-col gap-4 bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all">
+      <div className="flex items-center gap-4 border-b border-gray-100 dark:border-gray-700 pb-4">
         <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-purple-100 flex-shrink-0">
              <Image 
                src={item.image} 
@@ -131,13 +131,13 @@ const Card = ({ item }) => {
              />
         </div>
         <div>
-          <h3 className="font-bold text-gray-900">{item.name}</h3>
+          <h3 className="font-bold text-gray-900 dark:text-white">{item.name}</h3>
           <p className="text-purple-600 text-sm font-medium">{item.role}</p>
         </div>
       </div>
       
       <div className="h-64 overflow-y-auto pr-2 custom-scrollbar">
-        <p className="text-gray-600 leading-relaxed text-sm whitespace-pre-line">
+        <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-sm whitespace-pre-line">
           {item.fullText}
         </p>
       </div>

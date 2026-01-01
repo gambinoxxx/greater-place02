@@ -62,7 +62,7 @@ const Footer = () => {
               <p className="font-medium dark:text-white">Navigation</p>
               <nav className="flex flex-col mt-4 space-y-2 text-sm dark:text-gray-300">
                 <button
-                  onClick={() => scrollToSection('header')}
+                  onClick={() => scrollToSection('home')}
                   className="hover:opacity-75 hover:border-b hover:border-neutral-400 w-fit text-left"
                 >
                   Home
@@ -86,7 +86,7 @@ const Footer = () => {
                   Booking & Calendar
                 </button>
                 <button
-                  onClick={() => scrollToSection('features')}
+                  onClick={() => scrollToSection('about')}
                   className="hover:opacity-75 hover:border-b hover:border-neutral-400 w-fit text-left"
                 >
                   About Us

@@ -1,24 +1,24 @@
 "use client";
-import CoreFeatures from "@/components/CoreFeatures";
-import Features from "@/components/Features";
+import VideoGallery from "@/components/VideoGallery";
+import About from "@/components/About";
 import HeroSection from "@/components/HeroSection";
-import QualityFeatures from "@/components/QualityFeatures";
-import Services from "@/components/Services";
+import MissionVision from "@/components/MissionVision";
+import Gallery from "@/components/Gallery";
 import Subscribe from "@/components/Subscribe";
 import Team from "@/components/Team";
 import Testimonials from "@/components/Testimonials";
-import Work from "@/components/Work";
+import EventBooking from "@/components/EventBooking";
 
 export default function Home() {
   return (
-    <div className="flex flex-col gap-16 md:gap-32 dark:bg-gray-900">
+    <div className="flex flex-col gap-16 md:gap-32">
       <HeroSection />
-      <Features />
-      <Services />
-     <CoreFeatures />
-      <QualityFeatures />
+      <About />
+      <Gallery />
+      <VideoGallery />
+      <MissionVision />
       <Team />
-      <Work />
+      <EventBooking />
       <Testimonials />
       <Subscribe />
     </div>
