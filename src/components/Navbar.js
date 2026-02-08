@@ -88,7 +88,10 @@ const Navbar = () => {
                 className={`${
                   selectedItem === item.name ? "text-blue-600" : ""
                 } capitalize border-b py-4 md:border-none md:py-0 hover:text-blue-600`}
-                onClick={() => setSelectedItem(item.name)}
+                onClick={() => {
+                  setSelectedItem(item.name);
+                  setToggleMenu(false);
+                }}
               >
                 <Link href={`#${item.id}`}>{item.name}</Link>
               </li>
