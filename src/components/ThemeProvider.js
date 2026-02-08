@@ -6,19 +6,8 @@ import Footer from "./Footer";
 import ScrollTop from "./ScrollTop";
 import TextGlowEffect from "./TextGlowEffect";
 import NextNProgress from "nextjs-progressbar";
-import { useState, useEffect } from "react";
 
 const ThemeProvider = ({ children }) => {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return <>{children}</>;
-  }
-
   return (
     <Theme attribute={"class"} enableSystem={false}>
       <NextNProgress
