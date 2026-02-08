@@ -11,7 +11,7 @@ const EventBooking = () => {
   });
 
   const [status, setStatus] = useState('');
-  const [selectedMethod, setSelectedMethod] = useState('whatsapp');
+  const [selectedMethod, setSelectedMethod] = useState('email');
   const [upcomingEvents, setUpcomingEvents] = useState([]);
 
   useEffect(() => {
@@ -99,42 +99,42 @@ const EventBooking = () => {
 
       <div className="grid lg:grid-cols-2 gap-6 items-start">
         {/* Booking Form - Left Side */}
-        <div className="bg-gradient-to-br from-purple-50 to-blue-50 dark:from-gray-800 dark:to-gray-900 rounded-3xl p-4 md:p-6 shadow-xl">
+        <div className="bg-white rounded-3xl p-8 md:p-12 shadow-xl border border-gray-100">
           <div className="flex gap-4 mb-8">
-            <button
-              type="button"
-              className={`flex-1 py-3 px-6 rounded-xl font-bold transition-all duration-300 ${
-                selectedMethod === 'whatsapp'
-                  ? 'bg-gradient-to-r from-green-500 to-green-600 text-white shadow-lg'
-                  : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 border-2 border-gray-300 dark:border-gray-600 hover:border-green-400'
-              }`}
-              onClick={() => setSelectedMethod('whatsapp')}
-            >
-              📱 WhatsApp
-            </button>
             <button
               type="button"
               className={`flex-1 py-3 px-6 rounded-xl font-bold transition-all duration-300 ${
                 selectedMethod === 'email'
                   ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg'
-                  : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 border-2 border-gray-300 dark:border-gray-600 hover:border-blue-400'
+                  : 'bg-gray-50 text-gray-900 border-2 border-gray-200 hover:border-blue-400'
               }`}
               onClick={() => setSelectedMethod('email')}
             >
-              📧 Email
+               Email
+            </button>
+            <button
+              type="button"
+              className={`flex-1 py-3 px-6 rounded-xl font-bold transition-all duration-300 ${
+                selectedMethod === 'whatsapp'
+                  ? 'bg-gradient-to-r from-green-500 to-green-600 text-white shadow-lg'
+                  : 'bg-gray-50 text-gray-900 border-2 border-gray-200 hover:border-green-400'
+              }`}
+              onClick={() => setSelectedMethod('whatsapp')}
+            >
+              📱 WhatsApp
             </button>
           </div>
 
           <div className="space-y-6">
             {selectedMethod === 'whatsapp' ? (
               <>
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+                <h3 className="text-2xl font-bold text-gray-900 mb-6">
                   WhatsApp Booking Form
                 </h3>
 
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
                       Your Name
                     </label>
                     <input
@@ -142,13 +142,13 @@ const EventBooking = () => {
                       name="name"
                       value={bookingData.name}
                       onChange={handleChange}
-                      placeholder="John Doe"
+                      placeholder="John Doe" 
                       required
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition-all dark:bg-gray-700 dark:text-white"
+                      className="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition-all"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
                       Email
                     </label>
                     <input
@@ -158,13 +158,13 @@ const EventBooking = () => {
                       onChange={handleChange}
                       placeholder="john@example.com"
                       required
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition-all dark:bg-gray-700 dark:text-white"
+                      className="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition-all"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
                     Event Type
                   </label>
                   <select
@@ -172,7 +172,7 @@ const EventBooking = () => {
                     value={bookingData.eventType}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition-all dark:bg-gray-700 dark:text-white"
+                    className="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition-all"
                   >
                     <option value="Wedding">Wedding</option>
                     <option value="Corporate">Corporate Event</option>
@@ -183,7 +183,7 @@ const EventBooking = () => {
 
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
                       Event Date
                     </label>
                     <input
@@ -192,11 +192,11 @@ const EventBooking = () => {
                       value={bookingData.date}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition-all dark:bg-gray-700 dark:text-white"
+                      className="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition-all"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
                       Number of Guests
                     </label>
                     <input
@@ -207,13 +207,13 @@ const EventBooking = () => {
                       placeholder="50"
                       min="1"
                       required
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition-all dark:bg-gray-700 dark:text-white"
+                      className="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition-all"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
                     Special Requests
                   </label>
                   <textarea
@@ -222,17 +222,17 @@ const EventBooking = () => {
                     onChange={handleChange}
                     placeholder="Tell us about your event..."
                     rows="3"
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition-all resize-none dark:bg-gray-700 dark:text-white"
+                    className="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition-all resize-none"
                   />
                 </div>
               </>
             ) : (
               <div className="text-center py-8">
                 <div className="text-6xl mb-4">📧</div>
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">
                   Email Booking Form
                 </h3>
-                <p className="text-gray-600 dark:text-gray-300 text-lg mb-6">
+                <p className="text-gray-600 text-lg mb-6">
                   You'll be redirected to our secure Google Form to complete your booking request.
                 </p>
               </div>
@@ -269,14 +269,14 @@ const EventBooking = () => {
 
         {/* Upcoming Events - Right Side */}
         <div>
-          <h3 className="text-3xl font-bold dark:text-white mb-8 text-center lg:text-left">
+          <h3 className="text-3xl font-bold text-gray-900 mb-8 text-center lg:text-left">
             Upcoming Events
           </h3>
           <div className="space-y-6">
             {upcomingEvents.map(event => (
               <div 
                 key={event.id}
-                className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 border border-gray-100 dark:border-gray-700 flex gap-6 items-start"
+                className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 border border-gray-100 flex gap-6 items-start"
               >
                 <div className="flex-shrink-0 bg-gradient-to-br from-purple-500 to-blue-500 text-white rounded-xl p-4 text-center min-w-[80px]">
                   <div className="text-3xl font-bold">
@@ -287,10 +287,10 @@ const EventBooking = () => {
                   </div>
                 </div>
                 <div className="flex-1">
-                  <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                  <h4 className="text-xl font-bold text-gray-900 mb-2">
                     {event.title}
                   </h4>
-                  <p className="text-gray-600 dark:text-gray-300 flex items-center gap-2">
+                  <p className="text-gray-600 flex items-center gap-2">
                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                     </svg>
@@ -302,8 +302,8 @@ const EventBooking = () => {
           </div>
 
           {upcomingEvents.length === 0 && (
-            <div className="text-center py-12 bg-gray-50 dark:bg-gray-800 rounded-2xl">
-              <p className="text-gray-500 dark:text-gray-400 text-lg">No upcoming events at the moment.</p>
+            <div className="text-center py-12 bg-gray-50 rounded-2xl">
+              <p className="text-gray-500 text-lg">No upcoming events at the moment.</p>
             </div>
           )}
         </div>

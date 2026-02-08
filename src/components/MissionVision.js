@@ -39,32 +39,32 @@ const MissionVision = () => {
       <div className="grid lg:grid-cols-2 gap-6 items-start">
         {/* Mission & Vision - Left Side */}
         <div className="space-y-8">
-          <div className="bg-white dark:bg-gradient-to-br dark:from-gray-800 dark:to-gray-900 rounded-3xl p-4 shadow-lg">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-3">
+          <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-100">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4 flex items-center gap-3">
               <span className="text-4xl">🎯</span>
               Our Mission
             </h2>
-            <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+            <p className="text-lg text-gray-700 leading-relaxed">
               A faith-based nonprofit that partners with churches, schools, mental health programs, shelters, group homes, and communities to empower youth and young adults ages 8–33. We develop their gifts and build confidence through dance, mentorship, and creative expression—bringing freedom and social impact to their communities.
             </p>
           </div>
           
-          <div className="bg-white dark:bg-gradient-to-br dark:from-gray-800 dark:to-gray-900 rounded-3xl p-4 shadow-lg">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-3">
+          <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-100">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4 flex items-center gap-3">
               <span className="text-4xl">✨</span>
               Our Vision
             </h2>
-            <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+            <p className="text-lg text-gray-700 leading-relaxed">
               To see youth and young adults walking in liberty, purpose, and confidence through creativity and the art of dance.
             </p>
           </div>
           
-          <div className="bg-white dark:bg-gradient-to-br dark:from-gray-800 dark:to-gray-900 rounded-3xl p-4 shadow-lg">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-3">
+          <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-100">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4 flex items-center gap-3">
               <span className="text-4xl">🌍</span>
               2026 Theme: The Gathering
             </h2>
-            <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed italic mb-2">
+            <p className="text-lg text-gray-700 leading-relaxed italic mb-2">
               “Therefore go and make disciples of all nations, baptizing them in the name of the Father and of the Son and of the Holy Spirit, and teaching them to obey everything I have commanded you. And surely I am with you always, to the very end of the age.”
             </p>
             <p className="text-right text-purple-600 font-semibold">– Matthew 28:19–20</p>
@@ -73,13 +73,13 @@ const MissionVision = () => {
 
         {/* Donation Section - Right Side */}
         <div className="lg:sticky lg:top-24">
-          <div className="bg-white dark:bg-gradient-to-br dark:from-gray-800 dark:to-gray-900 rounded-3xl p-4 md:p-6 shadow-xl">
+          <div className="bg-white rounded-3xl p-8 md:p-12 shadow-xl border border-gray-100">
             {!showForm ? (
               <div className="text-center">
-                <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-4" id="donate">
+                <h3 className="text-3xl font-bold text-gray-900 mb-4" id="donate">
                   Make a Donation
                 </h3>
-                <p className="text-gray-600 dark:text-gray-300 mb-8 text-lg">
+                <p className="text-gray-600 mb-8 text-lg">
                   Your contribution helps us continue our mission of worship and creative expression
                 </p>
                 <button
@@ -91,13 +91,13 @@ const MissionVision = () => {
               </div>
             ) : (
               <div className="space-y-6 animate-fadeIn">
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+                <h3 className="text-2xl font-bold text-gray-900 mb-6">
                   Donation Details
                 </h3>
 
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
                       Your Name
                     </label>
                     <input
@@ -107,11 +107,11 @@ const MissionVision = () => {
                       onChange={handleChange}
                       placeholder="John Doe"
                       required
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition-all dark:bg-gray-700 dark:text-white"
+                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition-all"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
                       Email
                     </label>
                     <input
@@ -121,13 +121,13 @@ const MissionVision = () => {
                       onChange={handleChange}
                       placeholder="john@example.com"
                       required
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition-all dark:bg-gray-700 dark:text-white"
+                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition-all"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
+                  <label className="block text-sm font-semibold text-gray-700 mb-3">
                     Donation Amount
                   </label>
                   <div className="grid grid-cols-4 gap-3 mb-4">
@@ -138,7 +138,7 @@ const MissionVision = () => {
                         className={`py-3 rounded-lg font-bold transition-all duration-200 ${
                           donationData.amount === String(amount)
                             ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg scale-105'
-                            : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 border-2 border-gray-300 dark:border-gray-600 hover:border-purple-400'
+                            : 'bg-white text-gray-700 border-2 border-gray-300 hover:border-purple-400'
                         }`}
                         onClick={() => setDonationData({...donationData, amount: String(amount)})}
                       >
@@ -154,12 +154,12 @@ const MissionVision = () => {
                     min="1"
                     placeholder="Custom amount"
                     required
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition-all dark:bg-gray-700 dark:text-white"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition-all"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
                     Message (Optional)
                   </label>
                   <textarea
@@ -168,14 +168,14 @@ const MissionVision = () => {
                     onChange={handleChange}
                     placeholder="Share why you're supporting us..."
                     rows="3"
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition-all resize-none dark:bg-gray-700 dark:text-white"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition-all resize-none"
                   />
                 </div>
 
                 <div className="flex gap-4 pt-4">
                   <button 
                     type="button" 
-                    className="flex-1 px-6 py-3 rounded-lg font-semibold text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-600 transition-all"
+                    className="flex-1 px-6 py-3 rounded-lg font-semibold text-gray-700 bg-white border-2 border-gray-300 hover:bg-gray-50 transition-all"
                     onClick={() => setShowForm(false)}
                   >
                     Cancel
@@ -193,12 +193,12 @@ const MissionVision = () => {
           </div>
 
           {/* Info Box */}
-          <div className="mt-6 bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-100 dark:border-gray-700">
-            <h4 className="font-bold text-gray-900 dark:text-white mb-2 flex items-center gap-2">
+          <div className="mt-6 bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
+            <h4 className="font-bold text-gray-900 mb-2 flex items-center gap-2">
               <span className="text-2xl">💡</span>
               Your Impact
             </h4>
-            <p className="text-gray-600 dark:text-gray-300 text-sm">
+            <p className="text-gray-600 text-sm">
               Every donation helps us create spaces for worship, provide dance instruction, 
               and spread God's presence through creative expression.
             </p>

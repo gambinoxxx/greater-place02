@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 const FeatureCard = ({ imgSrc, title, desc, highlight }) => {
   return (
@@ -37,6 +37,30 @@ const FeatureCard = ({ imgSrc, title, desc, highlight }) => {
 };
 
 const About = () => {
+  const [currentVerseIndex, setCurrentVerseIndex] = useState(0);
+
+  const verses = [
+    {
+      text: "David danced with all his might because of God's presence",
+      ref: "2 Samuel 6:14"
+    },
+    {
+      text: "Let them praise his name with dancing and make music to him with timbrel and harp.",
+      ref: "Psalm 149:3"
+    },
+    {
+      text: "You turned my wailing into dancing; you removed my sackcloth and clothed me with joy.",
+      ref: "Psalm 30:11"
+    }
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentVerseIndex((prev) => (prev + 1) % verses.length);
+    }, 30000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section className="container mx-auto px-5 md:px-16 py-20" id="about">
       {/* Header Section */}
@@ -54,27 +78,31 @@ const About = () => {
 
       {/* Founder Section */}
       <div className="bg-gradient-to-br from-purple-50 to-blue-50 rounded-3xl p-8 md:p-12 mb-16 shadow-xl">
-        <div className="flex flex-col md:flex-row items-center gap-8">
-          <div className="w-48 h-48 rounded-full overflow-hidden shadow-2xl ring-4 ring-white flex-shrink-0">
-            <img
-              src="/features/7.PNG"
-              width="192"
-              height="192"
-              alt="Brandy Onwuzuruike"
-              className="object-cover w-full h-full"
-            />
+        <div className="flex flex-col lg:flex-row items-center gap-12">
+          <div className="flex flex-col items-center gap-3 flex-shrink-0 justify-center">
+            <div className="w-64 h-64 rounded-full overflow-hidden shadow-2xl ring-4 ring-white">
+              <img
+                src="/founder.jpg"
+                height="256"
+                alt="Brandy and Ijeoma"
+                className="object-cover w-full h-full"
+              />
+            </div>
+            <div className="text-center">
+              <p className="font-bold text-gray-900">Brandy & Ijeoma</p>
+              <p className="text-purple-600 text-sm font-semibold">Founder & Executive Director</p>
+            </div>
           </div>
           
-          <div className="flex-1 text-center md:text-left">
-            <h3 className="text-3xl font-bold text-gray-900 mb-2">
-              Brandy Onwuzuruike
-            </h3>
-            <p className="text-purple-600 font-semibold mb-4">Founder & Visionary</p>
+          <div className="flex-1 text-center lg:text-left">
+            {/* <h3 className="text-3xl font-bold text-gray-900 mb-4">
+              Our Leadership
+            </h3> */}
             <p className="text-gray-700 leading-relaxed text-lg mb-4">
-              Hi everyone! My name is Brandy Onwuzuruike, and I am the founder and visionary of Greater Place Nonprofit Inc. For as long as I can remember, I’ve had dreams and revelations of dancing and helping kids and youth. These visions confirmed what God was placing in my heart—that now is the time to fully walk in the calling He has given me.
+              Greater Place Nonprofit, founded by Brandy Onwuzuruike, creates spaces where God’s presence meets creative expression. Through dance, storytelling, and worship, we bring heaven to earth and serve God with all our might — “Your kingdom come, Your will be done, on earth as it is in heaven” (Matthew 6:10), just as “David danced before the Lord with all his might” (2 Samuel 6:14).
             </p>
             <p className="text-gray-700 leading-relaxed text-lg">
-              As a little girl, dancing in God’s presence shaped my spirit, soul, and body in powerful ways. Over time, God has continued to prune and prepare me in ways I never expected. I truly believe that Greater Place is more than a dance it’s a space for holistic growth. It’s a place where individuals of all ages, especially youth, can be nurtured spiritually, emotionally, and physically—through the beautiful avenue of dance. At Greater Place, we believe God is concerned with the whole person. In 1 Thessalonians 5:23, Paul prays that our spirit, soul, and body be kept blameless until the coming of the Lord. This Scripture is foundational to what we do—we want people to grow in wholeness, strength, and confidence in Christ.
+              Led alongside Executive Director Ijeoma, a lifelong dancer, storyteller, scriptwriter, author, and teacher, Greater Place empowers the next generation to boldly express themselves, discover their gifts, and use creativity to impact the world for Christ.
             </p>
           </div>
         </div>
@@ -116,9 +144,9 @@ const About = () => {
         <div className="max-w-4xl mx-auto">
           <div className="text-6xl mb-6 opacity-50">"</div>
           <blockquote className="text-2xl md:text-3xl font-light leading-relaxed mb-6 italic">
-            David danced with all his might because of God's presence
+            {verses[currentVerseIndex].text}
           </blockquote>
-          <p className="text-purple-200 text-lg">2 Samuel 6:14</p>
+          <p className="text-purple-200 text-lg">{verses[currentVerseIndex].ref}</p>
         </div>
       </div>
 

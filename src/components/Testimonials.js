@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import Image from "next/image";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
@@ -122,14 +121,6 @@ const Card = ({ item }) => {
   return (
     <div className="mx-3 h-full flex flex-col gap-4 bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all">
       <div className="flex items-center gap-4 border-b border-gray-100 dark:border-gray-700 pb-4">
-        <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-purple-100 flex-shrink-0">
-             <Image 
-               src={item.image} 
-               alt={item.name}
-               fill
-               className="object-cover"
-             />
-        </div>
         <div>
           <h3 className="font-bold text-gray-900 dark:text-white">{item.name}</h3>
           <p className="text-purple-600 text-sm font-medium">{item.role}</p>
