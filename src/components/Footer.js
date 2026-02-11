@@ -2,6 +2,8 @@
 
 import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
+import TikTokIcon from "@mui/icons-material/TikTok";
+
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
@@ -36,23 +38,30 @@ const Footer = () => {
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           <div>
             <Link href={"/"} className="text-3xl">
-              <span className="text-purple-600">Greater</span> Place.
+              // <span className="text-purple-600">Greater</span> Place.
+             <span className="text-blue-600">G</span>reater <span className="text-blue-600">P</span>lace.
             </Link>
             <p className="max-w-xs mt-4 text-sm dark:text-gray-300">
               Creating a sacred space where people of all ages can embrace their God-given creative gifts through dance.
             </p>
             <div className="flex mt-8 space-x-6">
               <Link
-                href="https://www.instagram.com/reel/DI23Np5t2n1/?igsh=Nm5nbjVhbWt3aWF5"
+                href="https://www.instagram.com/greaterplace_nonprofit?igsh=M2djOWR0ZDRvcnVx"
                 target="_blank"
               >
                 <InstagramIcon className="hover:text-purple-600 hover:-translate-y-1 transition-all" />
               </Link>
               <Link
-                href="https://youtube.com/@greaterplacenonprofit?si=JU5hHLMOAUOmBSAF"
+                href="https://youtube.com/@greaterplacenonprofit?si=UvoctfqLeSMnqIjO"
                 target="_blank"
               >
                 <YouTubeIcon className="hover:text-purple-600 hover:-translate-y-1 transition-all" />
+              </Link>
+                  <Link
+                href="https://www.tiktok.com/t/ZThfjPXAX/"
+                target="_blank"
+              >
+                <TikTokIcon className="hover:text-purple-600 hover:-translate-y-1 transition-all" />
               </Link>
             </div>
           </div>
@@ -110,7 +119,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <p className="mt-8 text-xs dark:text-gray-400">Copyright &copy; Greater Place Non Profit Inc. 2025</p>
+        <p className="mt-8 text-xs dark:text-gray-400">Copyright &copy; Greater Place Non Profit Inc. 2026</p>
       </div>
     </footer>
   );
