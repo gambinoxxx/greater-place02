@@ -2,7 +2,6 @@
 
 import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
-import TikTokIcon from "@mui/icons-material/TikTok";
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -57,12 +56,12 @@ const Footer = () => {
               >
                 <YouTubeIcon className="hover:text-purple-600 hover:-translate-y-1 transition-all" />
               </Link>
-                  <Link
-                href="https://www.tiktok.com/t/ZThfjPXAX/"
-                target="_blank"
-              >
-                <TikTokIcon className="hover:text-purple-600 hover:-translate-y-1 transition-all" />
-              </Link>
+              //     <Link
+              //   href="https://www.tiktok.com/t/ZThfjPXAX/"
+              //   target="_blank"
+              // >
+              //   <TikTokIcon className="hover:text-purple-600 hover:-translate-y-1 transition-all" />
+              // </Link>
             </div>
           </div>
 
