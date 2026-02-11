@@ -56,12 +56,6 @@ const Footer = () => {
               >
                 <YouTubeIcon className="hover:text-purple-600 hover:-translate-y-1 transition-all" />
               </Link>
-              //     <Link
-              //   href="https://www.tiktok.com/t/ZThfjPXAX/"
-              //   target="_blank"
-              // >
-              //   <TikTokIcon className="hover:text-purple-600 hover:-translate-y-1 transition-all" />
-              // </Link>
             </div>
           </div>
 
