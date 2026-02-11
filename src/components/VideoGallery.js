@@ -6,12 +6,7 @@ const VideoGallery = () => {
   const videos = [
     { id: 'IXCgjcl-APs', title: 'Worship Session 1', category: 'Worship' },
     { id: 'KmP1bqAB0_Q', title: 'Dance Performance 1', category: 'Performance' },
-    { id: 'O_UcyWEkqSw', title: 'Worship Session 2', category: 'Worship' },
-    { id: '_1fbvkqvMy4', title: 'Dance Performance 2', category: 'Performance' },
     { id: 'D2v3MfolRyI', title: 'Worship Session 3', category: 'Worship' },
-    { id: 'ySDk4L9Yr-w', title: 'Dance Performance 3', category: 'Performance' },
-    { id: 'Xp-AhwGJQCU', title: 'Worship Session 4', category: 'Worship' },
-    { id: 'nnPUAXNlOTk', title: 'Dance Performance 4', category: 'Performance' }
   ];
 
   const displayedVideos = showMoreVideos ? videos : videos.slice(0, 3);
