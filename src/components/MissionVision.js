@@ -41,7 +41,7 @@ const MissionVision = () => {
         <div className="space-y-8">
           <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-100">
             <h2 className="text-3xl font-bold text-gray-900 mb-4 flex items-center gap-3">
-              <span className="text-4xl">🎯</span>
+              <span className="text-4xl"></span>
               Our Mission
             </h2>
             <p className="text-lg text-gray-700 leading-relaxed">
@@ -51,7 +51,7 @@ const MissionVision = () => {
           
           <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-100">
             <h2 className="text-3xl font-bold text-gray-900 mb-4 flex items-center gap-3">
-              <span className="text-4xl">✨</span>
+              <span className="text-4xl"></span>
               Our Vision
             </h2>
             <p className="text-lg text-gray-700 leading-relaxed">
@@ -61,7 +61,7 @@ const MissionVision = () => {
           
           <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-100">
             <h2 className="text-3xl font-bold text-gray-900 mb-4 flex items-center gap-3">
-              <span className="text-4xl">🌍</span>
+              <span className="text-4xl"></span>
               2026 Theme: The Gathering
             </h2>
             <p className="text-lg text-gray-700 leading-relaxed italic mb-2">
