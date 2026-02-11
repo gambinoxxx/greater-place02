@@ -37,7 +37,6 @@ const Footer = () => {
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           <div>
             <Link href={"/"} className="text-3xl">
-              // <span className="text-purple-600">Greater</span> Place.
              <span className="text-blue-600">G</span>reater <span className="text-blue-600">P</span>lace.
             </Link>
             <p className="max-w-xs mt-4 text-sm dark:text-gray-300">
