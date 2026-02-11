@@ -24,7 +24,7 @@ const HeroSection = () => {
         <p className="text-lg leading-normal sm:leading-loose my-4 md:my-6 mx-auto dark:text-white leading-relaxed  ">
           Welcome to Greater place Non-profit Inc est. in 2023
         </p>
-        <Link href="#features" className="inline-block bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold text-lg px-12 py-4 rounded-full hover:from-purple-700 hover:to-blue-700 transform hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl">
+        <Link href="#about" className="inline-block bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold text-lg px-12 py-4 rounded-full hover:from-purple-700 hover:to-blue-700 transform hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl">
           Explore
         </Link>
       </div>
