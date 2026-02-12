@@ -16,6 +16,7 @@ import { useRouter } from "next/navigation";
 const Navbar = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
   const [selectedItem, setSelectedItem] = useState("/");
+  const [hoveredItem, setHoveredItem] = useState(null);
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [user, setUser] = useState(null);
@@ -23,12 +24,12 @@ const Navbar = () => {
   const router = useRouter();
 
   const navLinks = [
-    { name: "home", id: "home" },
-    { name: "about", id: "about" },
-    { name: "gallery", id: "gallery" },
-    { name: "events", id: "events" },
-    { name: "team", id: "team" },
-    { name: "testimonial", id: "testimonials" },
+    { name: "home", id: "home", color: "#4F46E5" }, // Indigo
+    { name: "about", id: "about", color: "#7C3AED" }, // Purple
+    { name: "gallery", id: "gallery", color: "#DB2777" }, // Pink
+    { name: "events", id: "events", color: "#DC2626" }, // Red
+    { name: "team", id: "team", color: "#EA580C" }, // Orange
+    { name: "testimonial", id: "testimonials", color: "#059669" }, // Emerald
   ];
 
   useEffect(() => {
@@ -47,9 +48,9 @@ const Navbar = () => {
   useEffect(() => {
     window.onscroll = () => {
       if (window.pageYOffset >= 200) {
-        navbar.current.classList.add("shadow");
+        navbar.current.classList.add("shadow-lg");
       } else {
-        navbar.current.classList.remove("shadow");
+        navbar.current.classList.remove("shadow-lg");
       }
     };
   }, []);
@@ -59,12 +60,13 @@ const Navbar = () => {
       ref={navbar}
       className={`${
         theme === "dark" ? "bg-[#121212] text-white" : "bg-white text-black"
-      } w-full z-50 fixed top-0 left-0 py-4 mb-10`}
+      } w-full z-50 fixed top-0 left-0 py-4 mb-10 transition-shadow duration-300`}
     >
       <div className="container px-5 md:px-16 flex items-center justify-between mx-auto">
         <Link href={"/"}>
-          <h2 className="text-3xl">
-            <span className="text-blue-600">G</span>reater <span className="text-blue-600">P</span>lace.
+          <h2 className="text-3xl font-bold">
+            <span className="text-blue-600">G</span>reater{" "}
+            <span className="text-blue-600">P</span>lace.
           </h2>
         </Link>
 
@@ -72,7 +74,7 @@ const Navbar = () => {
           <ul
             className={`${toggleMenu === true ? "left-0" : "-left-full"} ${
               theme === "dark" ? "bg-[#121212] text-white" : "bg-white text-black"
-            } z-50 flex md:items-center gap-1 md:gap-5 lg:gap-10 md:relative absolute top-0 md:left-0 w-80 transition-all duration-500 h-screen md:w-auto md:h-auto flex-col md:flex-row shadow-2xl py-24 px-10 md:p-0 md:shadow-none`}
+            } z-50 flex md:items-center gap-1 md:gap-3 lg:gap-6 md:relative absolute top-0 md:left-0 w-80 transition-all duration-500 h-screen md:w-auto md:h-auto flex-col md:flex-row shadow-2xl py-24 px-10 md:p-0 md:shadow-none`}
           >
             <button
               className={`${
@@ -85,19 +87,58 @@ const Navbar = () => {
             {navLinks.map((item) => (
               <li
                 key={item.name}
-                className={`${
-                  selectedItem === item.name ? "text-blue-600" : ""
-                } capitalize border-b py-4 md:border-none md:py-0 hover:text-blue-600`}
+                className="relative group"
+                onMouseEnter={() => setHoveredItem(item.name)}
+                onMouseLeave={() => setHoveredItem(null)}
                 onClick={() => {
                   setSelectedItem(item.name);
                   setToggleMenu(false);
                 }}
               >
-                <Link href={`#${item.id}`}>{item.name}</Link>
+                <Link href={`#${item.id}`}>
+                  <div
+                    className={`
+                      capitalize 
+                      py-3 px-4 md:py-2 md:px-3
+                      rounded-lg
+                      transition-all duration-300
+                      hover:scale-105
+                      ${
+                        selectedItem === item.name
+                          ? "font-semibold shadow-md"
+                          : "font-medium"
+                      }
+                    `}
+                    style={{
+                      backgroundColor:
+                        selectedItem === item.name
+                          ? item.color
+                          : hoveredItem === item.name
+                          ? `${item.color}20`
+                          : "transparent",
+                      color:
+                        selectedItem === item.name
+                          ? "#ffffff"
+                          : hoveredItem === item.name
+                          ? item.color
+                          : theme === "dark"
+                          ? "#ffffff"
+                          : "#1f2937",
+                    }}
+                  >
+                    {item.name}
+                  </div>
+                </Link>
+                
+                {/* Bottom color indicator for desktop */}
+                <div
+                  className="hidden md:block absolute bottom-0 left-0 right-0 h-0.5 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"
+                  style={{ backgroundColor: item.color }}
+                />
               </li>
             ))}
+            
             <div className="md:hidden mx-auto absolute bottom-16 left-1/2 -translate-x-1/2 flex gap-3">
-              
               <Link
                 href="https://www.instagram.com/reel/DI23Np5t2n1/?igsh=Nm5nbjVhbWt3aWF5"
                 target="_blank"
@@ -110,7 +151,6 @@ const Navbar = () => {
               >
                 <YouTubeIcon className="hover:text-purple-600 hover:-translate-y-1 transition-all" />
               </Link>
-            
             </div>
           </ul>
         </div>
@@ -123,7 +163,12 @@ const Navbar = () => {
                   Dashboard
                 </button>
               </Link>
-              <button onClick={handleLogout} className="text-sm font-semibold hover:text-red-500 transition-colors">Logout</button>
+              <button
+                onClick={handleLogout}
+                className="text-sm font-semibold hover:text-red-500 transition-colors"
+              >
+                Logout
+              </button>
             </div>
           ) : (
             <Link href={"/login"}>
@@ -136,17 +181,20 @@ const Navbar = () => {
             {mounted && theme === "dark" ? (
               <LightModeRoundedIcon
                 onClick={() => setTheme("light")}
-                className="text-white"
+                className="text-white hover:rotate-180 transition-transform duration-500"
               />
             ) : (
-              <DarkModeOutlinedIcon onClick={() => setTheme("dark")} />
+              <DarkModeOutlinedIcon 
+                onClick={() => setTheme("dark")} 
+                className="hover:rotate-180 transition-transform duration-500"
+              />
             )}
           </button>
           <button
             aria-label="menu"
             className={`${
               theme === "dark" ? "text-white" : "text-black"
-            } md:hidden`}
+            } md:hidden hover:scale-110 transition-transform`}
             onClick={() => setToggleMenu(true)}
           >
             <MenuIcon />
