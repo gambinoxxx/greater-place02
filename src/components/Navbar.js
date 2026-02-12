@@ -15,6 +15,7 @@ import { useRouter } from "next/navigation";
 
 const Navbar = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
+  const [selectedItem, setSelectedItem] = useState("home");
   const [hoveredItem, setHoveredItem] = useState(null);
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
@@ -23,6 +24,7 @@ const Navbar = () => {
   const router = useRouter();
 
   const navLinks = [
+    { name: "home", id: "home", color: "#4F46E5", image: "/about.png" },
     { name: "about", id: "about", color: "#7C3AED", image: "/about.png" },
     { name: "gallery", id: "gallery", color: "#DB2777", image: "/gallery.png" },
     { name: "events", id: "events", color: "#DC2626", image: "/event.png" },
@@ -30,6 +32,7 @@ const Navbar = () => {
     { name: "testimonial", id: "testimonials", color: "#059669", image: "/testimony.png" },
   ];
 
+  /* ================= AUTH ================= */
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -43,27 +46,22 @@ const Navbar = () => {
     router.push("/");
   };
 
-  // Scroll shadow
+  /* ================= SHADOW ON SCROLL ================= */
   useEffect(() => {
     const handleScroll = () => {
-      if (window.pageYOffset > 50) {
+      if (window.pageYOffset > 100) {
         navbar.current?.classList.add("shadow-lg");
       } else {
         navbar.current?.classList.remove("shadow-lg");
       }
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Lock body scroll when mobile menu open
+  /* ================= LOCK BODY SCROLL ================= */
   useEffect(() => {
-    if (toggleMenu) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
+    document.body.style.overflow = toggleMenu ? "hidden" : "auto";
   }, [toggleMenu]);
 
   return (
@@ -72,10 +70,10 @@ const Navbar = () => {
       <div
         ref={navbar}
         className={`${
-          theme === "dark" ? "bg-[#121212] text-white" : "bg-white text-black"
-        } w-full fixed top-0 left-0 z-50 transition-shadow duration-300`}
+          theme === "dark" ? "bg-[#121212]" : "bg-white"
+        } fixed w-full top-0 left-0 z-50 py-4 transition-shadow duration-300`}
       >
-        <div className="container mx-auto px-5 md:px-16 py-4 flex items-center justify-between">
+        <div className="container mx-auto px-5 md:px-16 flex items-center justify-between">
 
           {/* LOGO */}
           <Link href="/">
@@ -85,37 +83,90 @@ const Navbar = () => {
             </h2>
           </Link>
 
-          {/* DESKTOP NAVIGATION */}
-          <ul className="hidden md:flex gap-8">
+          {/* ================= MENU ================= */}
+          <ul
+            className={`${toggleMenu ? "left-0" : "-left-full"} ${
+              theme === "dark" ? "bg-[#121212]" : "bg-white"
+            } md:relative absolute top-0 md:left-0 w-80 md:w-auto h-screen md:h-auto flex flex-col md:flex-row gap-3 md:gap-6 py-24 px-10 md:p-0 shadow-2xl md:shadow-none transition-all duration-500 z-50`}
+          >
+            {/* CLOSE BUTTON */}
+            <button
+              className="md:hidden absolute top-6 right-6"
+              onClick={() => setToggleMenu(false)}
+            >
+              <CloseOutlinedIcon />
+            </button>
+
             {navLinks.map((item) => (
               <li
                 key={item.name}
-                className="capitalize font-medium cursor-pointer hover:text-blue-600 transition"
+                className="relative group"
                 onMouseEnter={() => setHoveredItem(item)}
                 onMouseLeave={() => setHoveredItem(null)}
+                onClick={() => {
+                  setSelectedItem(item.name);
+                  setToggleMenu(false);
+                }}
               >
-                <Link href={`#${item.id}`}>{item.name}</Link>
+                <Link href={`#${item.id}`}>
+                  <div
+                    className="capitalize py-3 px-4 md:py-2 md:px-3 rounded-lg transition-all duration-300 hover:scale-105 font-medium"
+                    style={{
+                      backgroundColor:
+                        selectedItem === item.name
+                          ? item.color
+                          : hoveredItem?.name === item.name
+                          ? `${item.color}20`
+                          : "transparent",
+                      color:
+                        selectedItem === item.name
+                          ? "#ffffff"
+                          : hoveredItem?.name === item.name
+                          ? item.color
+                          : theme === "dark"
+                          ? "#ffffff"
+                          : "#111827",
+                    }}
+                  >
+                    {item.name}
+                  </div>
+                </Link>
+
+                {/* DESKTOP UNDERLINE */}
+                <div
+                  className="hidden md:block absolute bottom-0 left-0 right-0 h-0.5 scale-x-0 group-hover:scale-x-100 transition-transform duration-300"
+                  style={{ backgroundColor: item.color }}
+                />
               </li>
             ))}
+
+            {/* SOCIAL ICONS MOBILE */}
+            <div className="md:hidden absolute bottom-16 left-1/2 -translate-x-1/2 flex gap-4">
+              <InstagramIcon />
+              <YouTubeIcon />
+            </div>
           </ul>
 
-          {/* RIGHT SIDE */}
+          {/* ================= RIGHT SIDE ================= */}
           <div className="flex items-center gap-4">
 
             {user ? (
               <>
                 <Link href="/admin">
-                  <button className="px-6 py-2 text-white bg-gradient-to-r from-purple-600 to-blue-600 rounded-full hover:scale-105 transition">
+                  <button className="px-6 py-2 text-white rounded-full bg-gradient-to-r from-purple-600 to-blue-600 hover:scale-105 transition shadow-md">
                     Dashboard
                   </button>
                 </Link>
-                <button onClick={handleLogout} className="hover:text-red-500">
+                <button
+                  onClick={handleLogout}
+                  className="font-medium hover:text-red-500"
+                >
                   Logout
                 </button>
               </>
             ) : (
               <Link href="/login">
-                <button className="px-6 py-2 text-white bg-gradient-to-r from-purple-600 to-blue-600 rounded-full hover:scale-105 transition">
+                <button className="px-6 py-2 text-white rounded-full bg-gradient-to-r from-purple-600 to-blue-600 hover:scale-105 transition shadow-md">
                   Login
                 </button>
               </Link>
@@ -125,15 +176,19 @@ const Navbar = () => {
             {mounted && (
               <button
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="relative z-[70]"
+                className="hover:rotate-180 transition-transform duration-500"
               >
-                {theme === "dark" ? <LightModeRoundedIcon /> : <DarkModeOutlinedIcon />}
+                {theme === "dark" ? (
+                  <LightModeRoundedIcon />
+                ) : (
+                  <DarkModeOutlinedIcon />
+                )}
               </button>
             )}
 
             {/* HAMBURGER */}
             <button
-              className="md:hidden relative z-[70]"
+              className="md:hidden hover:scale-110 transition-transform"
               onClick={() => setToggleMenu(true)}
             >
               <MenuIcon />
@@ -141,73 +196,32 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* ================= MEGA DROPDOWN (DESKTOP) ================= */}
+        {/* ================= DROPDOWN IMAGE ================= */}
         {hoveredItem && (
           <div
-            className="hidden md:block absolute left-0 top-full w-full h-[400px] z-40 transition-all duration-300"
+            className="hidden md:block absolute left-0 top-full w-full h-[350px]"
             style={{
               backgroundImage: `url(${hoveredItem.image})`,
-              backgroundSize: "cover",
+              backgroundSize: "contain",
+              backgroundRepeat: "no-repeat",
               backgroundPosition: "center",
+              backgroundColor: "#000",
             }}
-            onMouseLeave={() => setHoveredItem(null)}
           >
-            {/* Color Overlay */}
             <div
               className="w-full h-full flex items-center justify-center"
-              style={{ backgroundColor: `${hoveredItem.color}CC` }}
+              style={{ backgroundColor: `${hoveredItem.color}AA` }}
             >
-              <div className="text-center text-white">
-                <h2 className="text-5xl font-bold capitalize">
-                  {hoveredItem.name}
-                </h2>
-                <p className="mt-4 text-lg">
-                  Explore our {hoveredItem.name} section
-                </p>
-                <Link href={`#${hoveredItem.id}`}>
-                  <button className="mt-6 px-6 py-3 bg-white text-black rounded-full font-semibold hover:scale-105 transition">
-                    View Section
-                  </button>
-                </Link>
-              </div>
+              <h2 className="text-5xl font-bold text-white capitalize">
+                {hoveredItem.name}
+              </h2>
             </div>
           </div>
         )}
       </div>
 
-      {/* ================= MOBILE MENU ================= */}
-      <div
-        className={`fixed top-0 left-0 h-screen w-80 bg-white dark:bg-[#121212] z-[60] transform ${
-          toggleMenu ? "translate-x-0" : "-translate-x-full"
-        } transition-transform duration-300 md:hidden`}
-      >
-        <button
-          className="absolute top-6 right-6"
-          onClick={() => setToggleMenu(false)}
-        >
-          <CloseOutlinedIcon />
-        </button>
-
-        <ul className="mt-24 flex flex-col gap-6 px-8">
-          {navLinks.map((item) => (
-            <li
-              key={item.name}
-              className="capitalize font-medium"
-              onClick={() => setToggleMenu(false)}
-            >
-              <Link href={`#${item.id}`}>{item.name}</Link>
-            </li>
-          ))}
-        </ul>
-
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-4">
-          <InstagramIcon />
-          <YouTubeIcon />
-        </div>
-      </div>
-
-      {/* Spacer so content doesn't hide behind fixed navbar */}
-      <div className="h-[80px]" />
+      {/* SPACING BELOW NAVBAR */}
+      <div className="h-[90px]" />
     </>
   );
 };
