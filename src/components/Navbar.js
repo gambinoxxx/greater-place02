@@ -24,9 +24,9 @@ const Navbar = () => {
   const router = useRouter();
 
   const navLinks = [
-    { name: "home", id: "home", color: "#4F46E5", image: "/home.png" },
+    { name: "home", id: "home", color: "#4F46E5", image: "/homi.png" },
     { name: "about", id: "about", color: "#7C3AED", image: "/about.png" },
-    { name: "gallery", id: "gallery", color: "#DB2777", image: "/gallert.png" },
+    { name: "gallery", id: "gallery", color: "#DB2777", image: "/gallero.png" },
     { name: "events", id: "events", color: "#DC2626", image: "/event.png" },
     { name: "team", id: "team", color: "#EA580C", image: "/Team.png" },
     { name: "testimonial", id: "testimonials", color: "#059669", image: "/testimony.png" },
