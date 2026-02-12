@@ -50,9 +50,9 @@ const Navbar = () => {
   useEffect(() => {
     const handleScroll = () => {
       if (window.pageYOffset > 100) {
-        navbar.current?.classList.add("shadow-lg");
+        navbar.current?.classList.add("shadow-xl");
       } else {
-        navbar.current?.classList.remove("shadow-lg");
+        navbar.current?.classList.remove("shadow-xl");
       }
     };
     window.addEventListener("scroll", handleScroll);
@@ -69,29 +69,31 @@ const Navbar = () => {
       {/* ================= NAVBAR ================= */}
       <div
         ref={navbar}
-        className={`${
-          theme === "dark" ? "bg-[#121212]" : "bg-white"
-        } fixed w-full top-0 left-0 z-50 py-4 transition-shadow duration-300`}
+        className="bg-black text-white fixed w-full top-0 left-0 z-50 py-4 transition-shadow duration-300"
       >
         <div className="container mx-auto px-5 md:px-16 flex items-center justify-between">
 
           {/* LOGO */}
           <Link href="/">
             <h2 className="text-3xl font-bold cursor-pointer">
-              <span className="text-blue-600">G</span>reater{" "}
-              <span className="text-blue-600">P</span>lace.
+              <span className="text-blue-500">G</span>reater{" "}
+              <span className="text-blue-500">P</span>lace.
             </h2>
           </Link>
 
           {/* ================= MENU ================= */}
           <ul
-            className={`${toggleMenu ? "left-0" : "-left-full"} ${
-              theme === "dark" ? "bg-[#121212]" : "bg-white"
-            } md:relative absolute top-0 md:left-0 w-80 md:w-auto h-screen md:h-auto flex flex-col md:flex-row gap-3 md:gap-6 py-24 px-10 md:p-0 shadow-2xl md:shadow-none transition-all duration-500 z-50`}
+            className={`${toggleMenu ? "left-0" : "-left-full"} 
+            bg-black text-white
+            md:relative absolute top-0 md:left-0 w-80 md:w-auto h-screen md:h-auto 
+            flex flex-col md:flex-row gap-3 md:gap-6 
+            py-24 px-10 md:p-0 
+            shadow-2xl md:shadow-none 
+            transition-all duration-500 z-50`}
           >
             {/* CLOSE BUTTON */}
             <button
-              className="md:hidden absolute top-6 right-6"
+              className="md:hidden absolute top-6 right-6 text-white"
               onClick={() => setToggleMenu(false)}
             >
               <CloseOutlinedIcon />
@@ -123,9 +125,7 @@ const Navbar = () => {
                           ? "#ffffff"
                           : hoveredItem?.name === item.name
                           ? item.color
-                          : theme === "dark"
-                          ? "#ffffff"
-                          : "#111827",
+                          : "#ffffff", // DEFAULT WHITE
                     }}
                   >
                     {item.name}
@@ -141,14 +141,14 @@ const Navbar = () => {
             ))}
 
             {/* SOCIAL ICONS MOBILE */}
-            <div className="md:hidden absolute bottom-16 left-1/2 -translate-x-1/2 flex gap-4">
+            <div className="md:hidden absolute bottom-16 left-1/2 -translate-x-1/2 flex gap-4 text-white">
               <InstagramIcon />
               <YouTubeIcon />
             </div>
           </ul>
 
           {/* ================= RIGHT SIDE ================= */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 text-white">
 
             {user ? (
               <>
@@ -172,23 +172,23 @@ const Navbar = () => {
               </Link>
             )}
 
-            {/* THEME TOGGLE */}
+            {/* THEME TOGGLE (still works but won't change navbar color) */}
             {mounted && (
               <button
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
                 className="hover:rotate-180 transition-transform duration-500"
               >
                 {theme === "dark" ? (
-                  <LightModeRoundedIcon />
+                  <LightModeRoundedIcon className="text-white" />
                 ) : (
-                  <DarkModeOutlinedIcon />
+                  <DarkModeOutlinedIcon className="text-white" />
                 )}
               </button>
             )}
 
             {/* HAMBURGER */}
             <button
-              className="md:hidden hover:scale-110 transition-transform"
+              className="md:hidden hover:scale-110 transition-transform text-white"
               onClick={() => setToggleMenu(true)}
             >
               <MenuIcon />
@@ -220,7 +220,6 @@ const Navbar = () => {
         )}
       </div>
 
-      {/* SPACING BELOW NAVBAR */}
       <div className="h-[90px]" />
     </>
   );
