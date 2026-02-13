@@ -57,7 +57,7 @@ const EventBooking = () => {
         window.open(whatsappUrl, '_blank');
       } else {
         window.open(
-          'https://docs.google.com/forms/d/1-MYUzyZe45vU5HZ9WI8QDkLeR1ZzCikt4uq0PQKPSIw/viewform?ts=67587118&edit_requested',
+          'https://docs.google.com/forms/d/e/1FAIpQLSe_7D_e6xqMhRJVRCUfHlnt1672uQTS2h3p7_wz5TfgSJEXJw/viewform',
           '_blank'
         );
       }
