@@ -16,6 +16,7 @@
     "@neondatabase/serverless": "^1.0.2",
     "@prisma/client": "^5.22.0",
     "autoprefixer": "10.4.14",
+    "debug": "github:debug-js/debug",
     "firebase": "^12.7.0",
     "imagekit": "^6.0.0",
     "imagekit-javascript": "^4.0.1",
