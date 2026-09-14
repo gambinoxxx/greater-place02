@@ -36,6 +36,17 @@ const AdminPage = () => {
     return () => unsubscribe();
   }, [router]);
 
+  const getAdminHeaders = async () => {
+    if (!auth.currentUser) {
+      throw new Error("You are not authenticated");
+    }
+
+    const idToken = await auth.currentUser.getIdToken();
+    return {
+      Authorization: `Bearer ${idToken}`,
+    };
+  };
+
   const fetchImages = async () => {
     try {
       const res = await fetch("/api/admin");
@@ -53,6 +64,8 @@ const AdminPage = () => {
 
     setUploading(true);
     try {
+      const authHeaders = await getAdminHeaders();
+
       // 1. Send file and data to Server API
       const formData = new FormData();
       formData.append("file", file);
@@ -63,6 +76,7 @@ const AdminPage = () => {
 
       const response = await fetch("/api/admin", {
         method: "POST",
+        headers: authHeaders,
         body: formData,
       });
 
@@ -92,6 +106,7 @@ const AdminPage = () => {
     e.preventDefault();
     setUploading(true);
     try {
+      const authHeaders = await getAdminHeaders();
       const formData = new FormData();
       formData.append("type", "event");
       formData.append("title", eventForm.title);
@@ -100,6 +115,7 @@ const AdminPage = () => {
 
       const response = await fetch("/api/admin", {
         method: "POST",
+        headers: authHeaders,
         body: formData,
       });
 
@@ -108,11 +124,12 @@ const AdminPage = () => {
         setEventForm({ title: "", date: "", location: "" });
         fetchImages();
       } else {
-        throw new Error("Failed to add event");
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to add event");
       }
     } catch (error) {
       console.error("Event upload error:", error);
-      alert("Failed to add event");
+      alert(error.message || "Failed to add event");
     } finally {
       setUploading(false);
     }
@@ -122,28 +139,40 @@ const AdminPage = () => {
     if (!confirm("Are you sure you want to delete this image?")) return;
     
     try {
-      const res = await fetch(`/api/admin?id=${id}`, { method: "DELETE" });
+      const authHeaders = await getAdminHeaders();
+      const res = await fetch(`/api/admin?id=${id}`, {
+        method: "DELETE",
+        headers: authHeaders,
+      });
       if (res.ok) {
         fetchImages(); // Refresh list
       } else {
-        alert("Failed to delete image");
+        const errorData = await res.json();
+        alert(errorData.error || "Failed to delete image");
       }
     } catch (error) {
       console.error("Delete error:", error);
+      alert(error.message || "Failed to delete image");
     }
   };
 
   const handleEventDelete = async (id) => {
     if (!confirm("Are you sure you want to delete this event?")) return;
     try {
-      const res = await fetch(`/api/admin?id=${id}&type=event`, { method: "DELETE" });
+      const authHeaders = await getAdminHeaders();
+      const res = await fetch(`/api/admin?id=${id}&type=event`, {
+        method: "DELETE",
+        headers: authHeaders,
+      });
       if (res.ok) {
         fetchImages();
       } else {
-        alert("Failed to delete event");
+        const errorData = await res.json();
+        alert(errorData.error || "Failed to delete event");
       }
     } catch (error) {
       console.error("Delete error:", error);
+      alert(error.message || "Failed to delete event");
     }
   };
 
@@ -290,7 +319,7 @@ const AdminPage = () => {
               <div key={img.id} className="relative group rounded-xl overflow-hidden aspect-square bg-gray-100 dark:bg-gray-800">
                 <img 
                   src={img.url} 
-                  alt={img.title} 
+                  alt={img.title}
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center p-2 text-center">
