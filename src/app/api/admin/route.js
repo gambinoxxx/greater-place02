@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import prisma from '../../../../lib/prisma';
 import ImageKit from "imagekit";
+import { requireAdmin } from '../../../../lib/require-admin';
 
 export const dynamic = "force-dynamic";
 
@@ -22,6 +23,9 @@ export async function GET() {
 }
 
 export async function POST(request) {
+  const auth = await requireAdmin(request);
+  if (!auth.ok) return auth.response;
+
   try {
     const formData = await request.formData();
     const type = formData.get("type");
@@ -31,8 +35,20 @@ export async function POST(request) {
       const date = formData.get("date");
       const location = formData.get("location");
 
+      if (!title || !date || !location) {
+        return NextResponse.json(
+          { error: "Title, date, and location are required" },
+          { status: 400 }
+        );
+      }
+
+      const parsedDate = new Date(date);
+      if (Number.isNaN(parsedDate.getTime())) {
+        return NextResponse.json({ error: "Invalid event date" }, { status: 400 });
+      }
+
       const newEvent = await prisma.event.create({
-        data: { title, date: new Date(date), location },
+        data: { title, date: parsedDate, location },
       });
       return NextResponse.json(newEvent);
     }
@@ -43,8 +59,8 @@ export async function POST(request) {
     const category = formData.get("category");
     const isFeatured = formData.get("isFeatured") === 'true';
 
-    if (!file) {
-      return NextResponse.json({ error: "No file uploaded" }, { status: 400 });
+    if (!file || typeof file.arrayBuffer !== "function") {
+      return NextResponse.json({ error: "No valid file uploaded" }, { status: 400 });
     }
 
     // Convert file to buffer for ImageKit upload
@@ -60,7 +76,7 @@ export async function POST(request) {
       file: buffer,
       fileName: file.name,
       folder: "/gallery",
-      tags: [category]
+      tags: category ? [category] : []
     });
     
     const newImage = await prisma.galleryImage.create({
@@ -77,28 +93,40 @@ export async function POST(request) {
     return NextResponse.json(newImage);
   } catch (error) {
     console.error("Upload error:", error);
-    return NextResponse.json({ error: 'Error saving image: ' + error.message }, { status: 500 });
+    return NextResponse.json({ error: 'Error saving image' }, { status: 500 });
   }
 }
 
 export async function DELETE(request) {
+  const auth = await requireAdmin(request);
+  if (!auth.ok) return auth.response;
+
   const { searchParams } = new URL(request.url);
   const id = searchParams.get('id');
   const type = searchParams.get('type');
 
   if (!id) return NextResponse.json({ error: 'ID is required' }, { status: 400 });
 
+  const parsedId = Number.parseInt(id, 10);
+  if (!Number.isInteger(parsedId) || parsedId <= 0) {
+    return NextResponse.json({ error: 'Invalid ID' }, { status: 400 });
+  }
+
   try {
     if (type === "event") {
-      await prisma.event.delete({ where: { id: parseInt(id) } });
+      await prisma.event.delete({ where: { id: parsedId } });
       return NextResponse.json({ message: 'Event deleted successfully' });
     }
 
     const image = await prisma.galleryImage.findUnique({
-      where: { id: parseInt(id) },
+      where: { id: parsedId },
     });
 
-    if (image && image.fileId) {
+    if (!image) {
+      return NextResponse.json({ error: 'Image not found' }, { status: 404 });
+    }
+
+    if (image.fileId) {
       const imagekit = new ImageKit({
         publicKey: process.env.NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY,
         privateKey: process.env.IMAGEKIT_PRIVATE_KEY,
@@ -109,12 +137,12 @@ export async function DELETE(request) {
     }
 
     await prisma.galleryImage.delete({
-      where: { id: parseInt(id) },
+      where: { id: parsedId },
     });
 
     return NextResponse.json({ message: 'Image deleted successfully' });
   } catch (error) {
     console.error("Delete error:", error);
-    return NextResponse.json({ error: 'Error deleting image' }, { status: 500 });
+    return NextResponse.json({ error: 'Error deleting resource' }, { status: 500 });
   }
 }
